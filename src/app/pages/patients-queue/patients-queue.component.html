@@ -1,0 +1,119 @@
+<section class="content">
+
+    <div class="card p-l-20 p-r-20">
+        <!--Filters-->
+        <div class="row p-t-20">
+            <div class="offset-3 col-1 p-r-5 text-right">
+                <i class="zmdi zmdi-search zmdi-hc-lg" style="position: relative; top: 8px;"></i>
+            </div>
+            <div class="col-2  p-l-5">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-line" placeholder="Buscar por nombre">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-line" placeholder="Buscar por clave de seguro">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+
+        <!--Patients Queue-->
+        <div class="row m-l-10">
+            <div class="col-9">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nombre del paciente</th>
+                        <th>Clave de seguro</th>
+                        <th>Sintomas</th>
+                        <th>Tiempo</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                            Carlos Alatorre
+                        </td>
+                        <td>
+                            13330414
+                        </td>
+                        <td>
+                            Tos leve
+                        </td>
+                        <td>
+                            <div class="timer text-center bg-warning">
+                                1:15:30
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-success">Pasar paciente</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--Add new patient-->
+            <div class="col-3">
+                <div align="center">
+                    <h3 style="color: #6b6b6b;">Nuevo paciente</h3>
+                </div>
+
+                <div class="card m-b-10" style="background-color: #3498db; height: 150px">
+                    <div class="row">
+                        <div class="col-12" style="margin-top: 20px; padding-left: 35px; padding-right: 35px">
+                            <span style="color: white; font-size: 13px">Clave de seguro</span>
+                            <!--<div class="fg-line ">-->
+                            <input type="text"
+                                   class="form-control p-l-5 m-t-5 bg-white"
+                                   placeholder="Ejemplo: 13020203"
+                                   required>
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-8 m-t-15">
+                            <button class="btn btn-danger" style="width: 100%; border-radius: 5px 5px 5px 5px; background-color: #e74c3c !important;" (click)="openAddPatient()">Registrar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c-p-crear-paciente" style="text-align: center; color: #4498db;">
+
+                    <span class="c-p-label-crear cursor-pointer">Crear nuevo paciente</span>
+
+                </div>
+
+                <div *ngIf="false">
+
+                    <input type="text" class="form-control" ng-model="vm.nuevoSintoma.nombre" placeholder="Nombre del sintoma">
+                    <select class="form-control">
+                        <option selected="selected" value="">Nivel de sintoma</option>
+                        <option value="az">Azul</option>
+                        <option value="v">Verde</option>
+                        <option value="a">Amarillo</option>
+                        <option value="n">Naranja</option>
+                        <option value="r">Rojo</option>
+                    </select>
+                    <select class="form-control">
+                        <option selected="selected" value="">Tipo de triage</option>
+                        <option value="obstetrico">Obstetrico</option>
+                        <option value="Adulto">Adulto</option>
+                        <option value="Pediatrico">Pediatrico</option>
+                    </select>
+
+                    <button class="btn btn-primary">Agregar sintoma</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
