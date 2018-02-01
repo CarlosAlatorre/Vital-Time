@@ -1,25 +1,135 @@
-<section class="" style="min-width: 800px; min-height: 500px; background-color: white;     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.31);
-    border-radius: 3px;
-    border: 0;">
-    <ul class="tab-nav tn-justified">
-        <li class="active">
-            <a >Triage</a>
-        </li>
-        <li>
-            <a>
-                Información Básica
-            </a>
-        </li>
-        <li>
-            <a>
-                Sintomas
-            </a>
-        </li>
-        <li class="button-next modal-content">
-            <a class="text-white">
-                Siguiente
-            </a>
-        </li>
-    </ul>
+<section class="addPatient-modal">
+    <div class="row">
+        <div class="col-12">
+            <ul class="tab-nav tn-justified">
+                <li class="">
+                    <a >Triage</a>
+                </li>
+                <li class="">
+                    <a>Información Básica</a>
+                </li>
+                <li class="active">
+                    <a>Cuestionario</a>
+                </li>
+                <li>
+                    <a>Sintomas</a>
+                </li>
+                <li class="button-next modal-content">
+                    <a class="text-white">Siguiente</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--Choose Triage Type-->
+    <div class="row" *ngIf="false">
+        <div class="col-12">
+
+        </div>
+    </div>
+
+    <!--Basic Information-->
+    <div class="row" *ngIf="false">
+
+        <!--Patient photo-->
+        <div class="col-3">
+            <img src="../../../assets/img/img-profile-M.png" alt="Foto Paciente" class="patient-photo">
+        </div>
+
+        <!--Information-->
+        <div class="col-9 p-r-40 m-t-10">
+
+            <!--Name and LastName-->
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <label>Nombres</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <label>Apellidos</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!--Age and ...-->
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group form-group--float">
+                        <input type="number" class="form-control form-control-line" formControlFloat>
+                        <label>Edad</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="m-b-15" style="color: #495057;">Genero</div>
+
+                    <label class="custom-control custom-radio">
+                        <input name="radio" type="radio" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Masculino</span>
+                    </label>
+
+                    <label class="custom-control custom-radio">
+                        <input name="radio" type="radio" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Femenino</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Birthday and Clave-->
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <div class="form-group form-group--float m-t-13">
+                            <label style="position: relative;">Fecha de nacimiento</label>
+                            <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" [bsConfig]="bsConfig"/>
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <!--<button class="btn btn-success" (click)="dp.toggle()">Date Picker</button>-->
+
+                </div>
+                <div class="col-6">
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <label>Clave de seguro</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!--Blood Type and Alergias-->
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <label>Tipo de sangre</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <label>Alergias</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Questions-->
+    <div class="row" *ngIf="true">
+
+    </div>
+
 
 </section>

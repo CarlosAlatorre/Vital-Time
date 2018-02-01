@@ -8,6 +8,9 @@ import {AppComponent} from './app.component';
 import {SharedService} from './shared/services/shared.service';
 import {routing} from './app.routing';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
 
 @NgModule({
     imports: [

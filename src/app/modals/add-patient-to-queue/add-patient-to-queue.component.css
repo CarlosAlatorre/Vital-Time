@@ -118,7 +118,22 @@
     background: #00bcd4;
 }
 
-.button-next{
+.button-next {
     margin-left: 60px;
     background-color: #3498db;
+}
+
+.addPatient-modal {
+    min-width: 800px;
+    min-height: 600px;
+    background-color: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.31);
+    border-radius: 3px;
+    border: 0;
+}
+
+.patient-photo{
+    width: 140px;
+    margin-top: 100%;
+    margin-left: 25%;
 }

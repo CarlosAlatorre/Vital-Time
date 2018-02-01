@@ -5,7 +5,7 @@ import {NgModule} from '@angular/core';
 import {LayoutRouting} from './layout.routing';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ProgressbarModule} from 'ngx-bootstrap/progressbar';
-import {ButtonsModule, TabsModule} from 'ngx-bootstrap';
+import {BsDatepickerModule, ButtonsModule, TabsModule} from 'ngx-bootstrap';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -20,6 +20,7 @@ import {PatientAssessmentComponent} from '../modals/patient-assessment/patient-a
 import {AddPatientToQueueComponent} from '../modals/add-patient-to-queue/add-patient-to-queue.component';
 import {Globals} from '../statics/globals';
 import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SharedModule} from '../shared/shared.module';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -44,12 +45,14 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CommonModule,
         LayoutRouting,
         FormsModule,
+        SharedModule,
         BsDropdownModule.forRoot(),
         ProgressbarModule.forRoot(),
         ButtonsModule.forRoot(),
         PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
         NgbModule,
         TabsModule.forRoot(),
+        BsDatepickerModule.forRoot()
     ],
     entryComponents: [
         NewPatientComponent,
