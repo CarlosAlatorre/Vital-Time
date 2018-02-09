@@ -7,9 +7,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from './app.component';
 import {SharedService} from './shared/services/shared.service';
 import {routing} from './app.routing';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
+import {ModalModule} from 'ngx-bootstrap';
+import { AddSymptomsComponent } from './modals/add-symptoms/add-symptoms.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -17,8 +18,7 @@ defineLocale('es', esLocale);
         BrowserModule,
         HttpModule,
         BrowserAnimationsModule,
-        routing,
-        NgbModule.forRoot(),
+        routing
 
     ],
     declarations: [

@@ -1,6 +1,6 @@
 <section class="content">
 
-    <div class="card p-l-20 p-r-20">
+    <div class="card p-l-20 p-r-20" style="height: 80vh">
         <!--Filters-->
         <div class="row p-t-20">
             <div class="offset-3 col-1 p-r-5 text-right">
@@ -110,12 +110,6 @@
 
                     <button class="btn btn-primary">Agregar sintoma</button>
 
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Datepicker" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" />
-                    </div>
-                    <button class="btn btn-success" (click)="dp.toggle()">Date Picker</button>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ import {NgModule} from '@angular/core';
 import {LayoutRouting} from './layout.routing';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ProgressbarModule} from 'ngx-bootstrap/progressbar';
-import {BsDatepickerModule, ButtonsModule, TabsModule} from 'ngx-bootstrap';
+import {BsDatepickerModule, ButtonsModule, ModalModule, TabsModule} from 'ngx-bootstrap';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -19,8 +19,9 @@ import {NewPatientComponent} from '../modals/new-patient/new-patient.component';
 import {PatientAssessmentComponent} from '../modals/patient-assessment/patient-assessment.component';
 import {AddPatientToQueueComponent} from '../modals/add-patient-to-queue/add-patient-to-queue.component';
 import {Globals} from '../statics/globals';
-import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../shared/shared.module';
+import {AddSymptomsComponent} from '../modals/add-symptoms/add-symptoms.component';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -36,7 +37,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PatientsQueueComponent,
         NewPatientComponent,
         PatientAssessmentComponent,
-        AddPatientToQueueComponent
+        AddPatientToQueueComponent,
+        AddSymptomsComponent
     ],
     providers: [
         Globals
@@ -49,15 +51,17 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         BsDropdownModule.forRoot(),
         ProgressbarModule.forRoot(),
         ButtonsModule.forRoot(),
-        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
-        NgbModule,
+        PerfectScrollbarModule,
+        // NgbModule,
         TabsModule.forRoot(),
-        BsDatepickerModule.forRoot()
+        BsDatepickerModule.forRoot(),
+        ModalModule.forRoot()
     ],
     entryComponents: [
         NewPatientComponent,
         PatientAssessmentComponent,
-        AddPatientToQueueComponent
+        AddPatientToQueueComponent,
+        AddSymptomsComponent
     ]
 })
 

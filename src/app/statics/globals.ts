@@ -8,9 +8,11 @@ export class Globals {
         size: "sm"
     };
     static optionModalLg: object = {
-        backdrop: "static",
-        keyboard: false,
-        size: "lg"
+        animated: true,
+        keyboard: true,
+        backdrop: true,
+        ignoreBackdropClick: false,
+
     };
 
 }

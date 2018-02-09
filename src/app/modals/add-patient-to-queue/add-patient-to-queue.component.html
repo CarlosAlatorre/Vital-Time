@@ -1,17 +1,19 @@
 <section class="addPatient-modal">
+
+    <!--Navigation-->
     <div class="row">
         <div class="col-12">
             <ul class="tab-nav tn-justified">
                 <li class="">
-                    <a >Triage</a>
+                    <a>Triage</a>
                 </li>
                 <li class="">
                     <a>Información Básica</a>
                 </li>
-                <li class="active">
+                <li class="">
                     <a>Cuestionario</a>
                 </li>
-                <li>
+                <li class="active">
                     <a>Sintomas</a>
                 </li>
                 <li class="button-next modal-content">
@@ -29,7 +31,7 @@
     </div>
 
     <!--Basic Information-->
-    <div class="row" *ngIf="false">
+    <div class="row" *ngIf="true">
 
         <!--Patient photo-->
         <div class="col-3">
@@ -67,7 +69,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="m-b-15" style="color: #495057;">Genero</div>
+                    <div class="m-b-15 formText-color">Genero</div>
 
                     <label class="custom-control custom-radio">
                         <input name="radio" type="radio" class="custom-control-input">
@@ -89,7 +91,8 @@
                     <div class="form-group">
                         <div class="form-group form-group--float m-t-13">
                             <label style="position: relative;">Fecha de nacimiento</label>
-                            <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" [bsConfig]="bsConfig"/>
+                            <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                                   [(bsValue)]="bsValue" [bsConfig]="bsConfig"/>
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
@@ -127,9 +130,524 @@
     </div>
 
     <!--Questions-->
-    <div class="row" *ngIf="true">
+    <div class="row m-t-20" *ngIf="false">
 
+        <div class="col-12">
+            <!--Woman and pregnant-->git
+            <div class="row" *ngIf="true">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-group form-group--float">
+                                <input type="text" class="form-control form-control-line" formControlFloat autofocus>
+                                <label class="form-bold">Tiempo presentando sintomas</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4" style="padding-left: 28px;">
+                            <div class="form-bold m-t-10 m-b-10">Consumo de medicamentos</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="medicamentos" type="radio" class="form-check-input" [value]="true" [(ngModel)]="medicamento">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="medicamentos" type="radio" class="form-check-input" [value]="false" [(ngModel)]="medicamento">
+                                <span class="">No</span>
+                            </label>
+
+                            <!--When and Wich-->
+                            <div *ngIf="medicamento" class="animated fadeIn">
+                                <div class="form-group m-t-10 m-b-10">
+                                    <input type="text" class="form-control form-control-line form-bold-placeholder" placeholder="¿Cuál(es)?">
+                                    <i class="form-group__bar"></i>
+                                </div>
+
+                                <div class="form-group m-b-0">
+                                    <input type="text" class="form-control form-control-line form-bold-placeholder" placeholder="¿Cuándo?">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-4" style="padding-left: 28px;">
+                            <div class="form-bold m-t-10 m-b-10">Cirugias previas</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="cirugias" type="radio" class="form-check-input">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="cirugias" type="radio" class="form-check-input">
+                                <span class="">No</span>
+                            </label>
+
+                            <!--When and Wich-->
+                            <div *ngIf="false">
+                                <div class="form-group m-t-10 m-b-10">
+                                    <input type="text" class="form-control form-control-line form-bold-placeholder" placeholder="¿Cuál(es)?">
+                                    <i class="form-group__bar"></i>
+                                </div>
+
+                                <div class="form-group m-b-0">
+                                    <input type="text" class="form-control form-control-line form-bold-placeholder" placeholder="¿Cuándo?">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <!--Woman-->
+                            <div class="form-group form-group--float m-t-35" *ngIf="false">
+                                <input type="text" class="form-control form-control-line"  formControlFloat>
+                                <label class="form-bold">Ultima menstruación</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+
+                            <!--Pregnant-->
+                            <div class="form-group form-group--float" *ngIf="true">
+                                <input type="number" class="form-control form-control-line" formControlFloat>
+                                <label class="form-bold">Semanas de gestación</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group form-group--float m-t-35">
+                                <input type="number" class="form-control form-control-line" formControlFloat>
+                                <label class="form-bold">Numero de embarazos</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-group form-group--float m-t-5">
+                                <input type="number" class="form-control form-control-line" formControlFloat>
+                                <label class="form-bold">Numero de partos</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group form-group--float m-t-5">
+                                <input type="number" class="form-control form-control-line" formControlFloat>
+                                <label class="form-bold">Numero de abortos</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4" style="padding-left: 28px;">
+                            <div class="form-bold m-t-10 m-b-10">Lactancia</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="lactancia" type="radio" class="form-check-input">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="lactancia" type="radio" class="form-check-input">
+                                <span class="">No</span>
+                            </label>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group form-group--select m-t-10">
+                                <div class="select">
+                                    <label class="form-bold">Ultimo parto</label>
+                                    <select class="form-control">
+                                        <option>Natural</option>
+                                        <option>Cesaria</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Man-->
+            <div class="row" *ngIf="false">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-group form-group--float">
+                                <input type="text" class="form-control form-control-line" formControlFloat autofocus>
+                                <label class="form-bold">Tiempo presentando sintomas</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-bold m-t-10 m-b-10">Cirugias previas</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="cirugia" type="radio" class="form-check-input">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="cirugia" type="radio" class="form-check-input">
+                                <span class="">No</span>
+                            </label>
+
+                            <!--When and Wich-->
+                            <div *ngIf="false">
+                                <div class="form-group form-group--float m-t-25">
+                                    <input type="text" class="form-control form-control-line form-control-danger" formControlFloat>
+                                    <label class="form-bold">¿Cual(es)?</label>
+                                    <i class="form-group__bar"></i>
+                                </div>
+
+                                <div class="form-group form-group--float m-t-15">
+                                    <input type="text" class="form-control form-control-line" formControlFloat>
+                                    <label class="form-bold">¿Cuando?</label>
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-bold m-t-10 m-b-10">¿Ha consumido medicamentos?</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="medicamentos" type="radio" class="form-check-input">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="medicamentos" type="radio" class="form-check-input">
+                                <span class="">No</span>
+                            </label>
+
+                            <!--When and Wich-->
+                            <div *ngIf="false">
+                                <div class="form-group form-group--float m-t-25">
+                                    <input type="text" class="form-control form-control-line form-control-danger" formControlFloat>
+                                    <label class="form-bold">¿Cual(es)?</label>
+                                    <i class="form-group__bar"></i>
+                                </div>
+
+                                <div class="form-group form-group--float m-t-15">
+                                    <input type="text" class="form-control form-control-line" formControlFloat>
+                                    <label class="form-bold">¿Cuando?</label>
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Children-->
+            <div class="row" *ngIf="false">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-group form-group--float">
+                                <input type="text" class="form-control form-control-line" formControlFloat>
+                                <label class="form-bold">Tiempo presentando sintomas</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-bold m-t-10 m-b-10">Consumo de medicamentos</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="medicamentos" type="radio" class="form-check-input">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="medicamentos" type="radio" class="form-check-input">
+                                <span class="">No</span>
+                            </label>
+
+                            <!--When and Wich-->
+                            <div *ngIf="medicamento" class="animated fadeIn">
+                                <div class="form-group m-t-10 m-b-10">
+                                    <input type="text" class="form-control form-control-line form-bold-placeholder" placeholder="¿Cuál(es)?">
+                                    <i class="form-group__bar"></i>
+                                </div>
+
+                                <div class="form-group m-b-0">
+                                    <input type="text" class="form-control form-control-line form-bold-placeholder" placeholder="¿Cuándo?">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-bold m-t-10 m-b-10">Cirugias previas</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="cirugias" type="radio" class="form-check-input">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="cirugias" type="radio" class="form-check-input">
+                                <span class="">No</span>
+                            </label>
+
+                            <!--When and Wich-->
+                            <div *ngIf="true" class="animated fadeIn">
+                                <div class="form-group m-t-10 m-b-10">
+                                    <input type="text" class="form-control form-control-line form-bold-placeholder" placeholder="¿Cuál(es)?">
+                                    <i class="form-group__bar"></i>
+                                </div>
+
+                                <div class="form-group m-b-0">
+                                    <input type="text" class="form-control form-control-line form-bold-placeholder" placeholder="¿Cuándo?">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-group form-group--float">
+                                <input type="text" class="form-control form-control-line" formControlFloat>
+                                <label class="form-bold">Tipo de dieta</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group form-group--float">
+                                <input type="text" class="form-control form-control-line" formControlFloat>
+                                <label class="form-bold">Ultima comida</label>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-group form-group--select">
+                                <div class="select">
+                                    <select class="form-control form-bold">
+                                        <option selected disabled>Parto</option>
+                                        <option>Natural</option>
+                                        <option>Cesarea</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group form-group--select">
+                                <div class="select">
+                                    <select class="form-control form-bold">
+                                        <option selected disabled>Estado</option>
+                                        <option>Activo</option>
+                                        <option>Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-2 col-4">
+                            <div class="form-bold m-t-10 m-b-10">¿Fue hoy?</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="fuehoy" type="radio" class="form-check-input">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="cirugias" type="radio" class="form-check-input">
+                                <span class="">No</span>
+                            </label>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-bold m-t-10 m-b-10">Escuela</div>
+                            <label class=" form-check d-inline-block">
+                                <input name="escuela" type="radio" class="form-check-input">
+                                <span class="">Si</span>
+                            </label>
+
+                            <label class=" form-check d-inline-block m-l-10">
+                                <input name="escuela" type="radio" class="form-check-input">
+                                <span class="">No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!--Symptoms-->
+    <div class="row p-t-40 p-l-50" *ngIf="false">
 
+        <!--Vital signs-->
+        <div class="col-3">
+
+            <div class="form-group form-group--float m-t-0">
+                <input type="number" class="form-control form-control-line" formControlFloat>
+                <label class="form-bold">Pulso</label>
+                <i class="form-group__bar"></i>
+            </div>
+
+            <div class="form-group form-group--float m-t-50">
+                <input type="number" class="form-control form-control-line" formControlFloat>
+                <label class="form-bold">Presion arterial sintolica</label>
+                <i class="form-group__bar"></i>
+            </div>
+
+            <div class="form-group form-group--float m-t-50">
+                <input type="number" class="form-control form-control-line" formControlFloat>
+                <label class="form-bold">Presion arterial diastólica</label>
+                <i class="form-group__bar"></i>
+            </div>
+
+            <div class="form-group form-group--float m-t-50">
+                <input type="number" class="form-control form-control-line" formControlFloat>
+                <label class="form-bold">Temperatura</label>
+                <i class="form-group__bar"></i>
+            </div>
+
+            <div class="form-group form-group--float m-t-50">
+                <input type="number" class="form-control form-control-line" formControlFloat>
+                <label class="form-bold">spO2</label>
+                <i class="form-group__bar"></i>
+            </div>
+
+        </div>
+
+        <!--Symptoms-->
+        <div class="col-5">
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <span class="cursor-pointer">Selecciona los sintomas</span>
+                </div>
+            </div>
+
+            <div class="row m-t-15" style="    height: 300px;overflow-y: auto;overflow-x: hidden;">
+                <div class="col-12 p-r-0">
+
+                    <div class="row" *ngIf="true">
+                        <div class="col-12 text-center cursor-pointer">
+                            <div class="zmdi zmdi-quote m-t-20 not-found-quote">
+                            </div>
+                            <div class="not-found">No hay</div>
+                            <div class="m-b-30 not-found">Sintomas</div>
+                        </div>
+                    </div>
+
+                    <table class="table table-hover table-sintomas">
+
+                        <tbody>
+
+                        <!--<tr ng-repeat="sintoma in vm.symptoms track by $index">-->
+                            <!--<td class="r-s-columnas">-->
+                                <!--<div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-9 r-s-a-s">-->
+                                        <!--</div>-->
+                                        <!--<div class="col-2 r-s-a-s-r">-->
+                                            <!--<img class="r-s-trash-icon cursor-pointer" ng-click="vm.removeItem(vm.symptoms, $index)"-->
+                                                 <!--src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABQUlEQVRoQ+1Z7W3CUAy8m6AjwAjdpIxAN+gobEBHoJt0BNgAJnD1pARVUZFt6vAUdPlr5/k+7BcjiIU/XDh+iEBvB+XAUzlgZlsAe4fUJ8n3KuJlLRQEP+IuIxEmYGZWpVrkHJIhbKGkVlAEIrL/ypEDScG6pYdnoBtCp3CawNzDHO39kZcIVLeWHPAU1Qx4t0pwhSgf4mnvTp3y4ldAIuBYfGsGPIW9uBzwbp8xLgcGJaJCeMKWrRJej3txzYBnlWZg8oHSDAwtoSG+dXtoFwreKmohtdCkVbr9JvZWBS/efZUIzpyb1s0BF1kw4REEzgBegniyaSeS68xL91yjBwBvmSKJ3C+Sm0R+/n9iM2sKfc/gwgXAK8njrATa4QOJXSsIYJUp+EfuaRDkIwu+nZVuoX+CLX9dBMolTR64eAd+APwQKUB3Y01CAAAAAElFTkSuQmCC">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Requireds-->
+        <div class="col-4">
+
+            <div class="row r-s-rows m-t-0 m-b-20">
+                <div class="col-12">
+                    <span>Requiere</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="control control--checkbox">
+                        Rayos x
+                        <input type="checkbox"/>
+                        <div class="control__indicator"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="control control--checkbox">
+                        Sala de choque
+                        <input type="checkbox"/>
+                        <span class="control__indicator"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="control control--checkbox">
+                        Analisis clinicos
+                        <input type="checkbox"/>
+                        <span class="control__indicator"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="control control--checkbox">
+                        Tomografia
+                        <input type="checkbox"/>
+                        <span class="control__indicator"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="control control--checkbox">
+                        Ultrasonido
+                        <input type="checkbox"/>
+                        <span class="control__indicator"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="control control--checkbox">
+                        Cirugia
+                        <input type="checkbox"/>
+                        <span class="control__indicator"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row m-t-20">
+                <div class="col-12 p-r-40">
+                    <div class="form-group">
+                        <textarea class="form-control form-control-line form-bold-placeholder" rows="8" placeholder="Observaciones"></textarea>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </section>

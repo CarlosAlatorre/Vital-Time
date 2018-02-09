@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+// import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddPatientToQueueComponent} from '../../modals/add-patient-to-queue/add-patient-to-queue.component';
 import {Globals} from '../../statics/globals';
+import {BsModalService} from 'ngx-bootstrap';
 
 @Component({
     selector: 'app-patients-queue',
@@ -10,7 +11,9 @@ import {Globals} from '../../statics/globals';
 })
 export class PatientsQueueComponent implements OnInit {
 
-    constructor(private _modalService: NgbModal) {
+    constructor(
+        private _modalService: BsModalService
+    ) {
         this.openAddPatient();
     }
 
@@ -18,7 +21,7 @@ export class PatientsQueueComponent implements OnInit {
     }
 
     openAddPatient(){
-        this._modalService.open(AddPatientToQueueComponent, Globals.optionModalLg);
+        this._modalService.show(AddPatientToQueueComponent, Object.assign({}, Globals.optionModalLg, { class: 'gray modal-lg' }));
     }
 
 }
