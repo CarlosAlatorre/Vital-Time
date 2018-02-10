@@ -6,6 +6,7 @@ import {Globals} from '../../statics/globals';
 import {PatientInfo} from '../../interfaces/patient-info';
 import {ValidationService} from '../../shared/services/validation.service';
 import {isGeneratedFile} from '@angular/compiler/src/aot/util';
+import {TRIAGETYPE} from '../../enums/enums';
 
 @Component({
     selector: 'app-add-patient-to-queue',
@@ -25,6 +26,9 @@ export class AddPatientToQueueComponent implements OnInit {
 
     }
 
+    //<------------------->
+    //Start of PatientInfo Variables
+    //<------------------->
     @ViewChild('patientNames')
     patientNames: ElementRef;
     @ViewChild('patientLastNames')
@@ -44,10 +48,20 @@ export class AddPatientToQueueComponent implements OnInit {
 
     _patientInfo: PatientInfo = {} as PatientInfo;
 
+    triageType:number = TRIAGETYPE.CHILD;
+
+    //<------------------->
+    //End of PatientInfo Variables
+    //<------------------->
+
     ngOnInit() {
     }
 
-    mostrarDatos() {
+
+    //<------------------->
+    //Start of PatientInfo
+    //<------------------->
+    advanceToSymptoms() {
         console.log(this._patientInfo);
         if (this.isPatientInfoReady()) console.log('Listo');
     }
@@ -178,5 +192,9 @@ export class AddPatientToQueueComponent implements OnInit {
         input = String.fromCharCode(e.which);
         return !!/[\d\s]/.test(input);
     }
+
+    //<------------------->
+    //End of PatientInfo
+    //<------------------->
 
 }

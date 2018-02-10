@@ -17,25 +17,32 @@
                     <a>Sintomas</a>
                 </li>
                 <li class="button-next modal-content">
-                    <a class="text-white" (click)="mostrarDatos()">Siguiente</a>
+                    <a class="text-white" (click)="advanceToSymptoms()">Siguiente</a>
                 </li>
             </ul>
-        </div>
-    </div>
-
-    <!--Choose Triage Type-->
-    <div class="row" *ngIf="false">
-        <div class="col-12">
-
         </div>
     </div>
 
     <!--Basic Information-->
     <div class="row" *ngIf="true">
 
-        <!--Patient photo-->
+        <!--Triage Type-->
         <div class="col-3">
-            <img src="../../../assets/img/img-profile-M.png" alt="Foto Paciente" class="patient-photo">
+            <!---Triage Photo--->
+            <img src="../../../assets/img/child.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==0">
+            <img src="../../../assets/img/women.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==1">
+            <img src="../../../assets/img/pregnant.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==2">
+            <img src="../../../assets/img/adult.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==3">
+
+                <div class="ml-5 mt-4 w-100">
+                    <select [(ngModel)]="triageType">
+                        <option value="0">Selecciona Triage</option>
+                        <option value="0">Niño</option>
+                        <option value="1">Mujer Adulta</option>
+                        <option value="2">Mujer Embarazada</option>
+                        <option value="3">Hombre Adulto</option>
+                    </select>
+                </div>
         </div>
 
         <!--Information-->
