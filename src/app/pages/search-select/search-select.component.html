@@ -1,0 +1,15 @@
+<section>
+    <div class="form-group m-b-0">
+        <i class="zmdi zmdi-search zmdi-hc-lg d-inline-block"></i>
+        <input type="text" class="form-control form-control-line d-inline-block w-75" placeholder="Buscar sintoma" (click)="showOptions = !showOptions" #search (keyup)="searchSymptom(search.value)">
+        <i class="form-group__bar w-75" style="left: 15px"></i>
+    </div>
+
+    <div class="options" *ngIf="showOptions">
+        <perfect-scrollbar>
+            <div class="option-select" *ngFor="let symptom of symptomsOptionsSearched" (click)="addSymptom(symptom)">
+                {{ symptom.name }}
+            </div>
+        </perfect-scrollbar>
+    </div>
+</section>

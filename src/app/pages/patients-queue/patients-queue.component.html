@@ -113,6 +113,55 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6">
+                <input type="text" class="form-control form-control-line" [(ngModel)]="symptom.name" placeholder="Nombre del sintoma">
+                <select class="form-control form-control-line" [(ngModel)]="symptom.level">
+                    <option [value]="levelSymptom.RED">Rojo</option>
+                    <option [value]="levelSymptom.ORANGE">Naranja</option>
+                    <option [value]="levelSymptom.YELLOW">Amarillo</option>
+                    <option [value]="levelSymptom.GREEN">Verde</option>
+                    <option [value]="levelSymptom.BLUE">Azul</option>
+                </select>
+                <select class="form-control form-control-line" [(ngModel)]="symptom.triage">
+                    <option [value]="triageType.KID">Pediatrico</option>
+                    <!--<option [value]="triageType.WOMAN">Adulto Mujer</option>-->
+                    <option [value]="triageType.PREGNANT">Obstetrico</option>
+                    <option [value]="triageType.ADULTMALE">Adulto</option>
+                </select>
+
+                <button class="btn btn-primary" (click)="addSymptom()">Agregar sintoma</button>
+            </div>
+
+            <div class="col-6">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Sintoma</th>
+                        <th>Nivel</th>
+                        <th>Triage</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr *ngFor="let symptom of symptoms | async">
+                        <td>
+                            {{ symptom.name }}
+                        </td>
+                        <td>
+                            {{ getLevel(symptom.level) }}
+                        </td>
+                        <td>
+                            {{ getTriageType(symptom.triage) }}
+                        </td>
+                        <td>
+                            <i class="zmdi zmdi-close-circle text-danger zmdi-hc-2x cursor-pointer" (click)="deleteSymptom(symptom.key)"></i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 </section>

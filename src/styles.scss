@@ -54,3 +54,11 @@
 @import "./assets/scss/spacing";
 @import "./assets/scss/calendar";
 @import "assets/scss/radios";
+
+.swal2-container.swal2-shown{
+    z-index: 3000;
+}
+
+.swal2-confirm{
+    margin-left: 10px;
+}
