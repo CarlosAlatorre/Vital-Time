@@ -17,25 +17,32 @@
                     <a>Sintomas</a>
                 </li>
                 <li class="button-next modal-content">
-                    <a class="text-white">Siguiente</a>
+                    <a class="text-white" (click)="advanceToSymptoms()">Siguiente</a>
                 </li>
             </ul>
-        </div>
-    </div>
-
-    <!--Choose Triage Type-->
-    <div class="row" *ngIf="false">
-        <div class="col-12">
-
         </div>
     </div>
 
     <!--Basic Information-->
     <div class="row" *ngIf="true">
 
-        <!--Patient photo-->
+        <!--Triage Type-->
         <div class="col-3">
-            <img src="../../../assets/img/img-profile-M.png" alt="Foto Paciente" class="patient-photo">
+            <!---Triage Photo--->
+            <img src="../../../assets/img/child.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==0">
+            <img src="../../../assets/img/women.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==1">
+            <img src="../../../assets/img/pregnant.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==2">
+            <img src="../../../assets/img/adult.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==3">
+
+                <div class="ml-5 mt-4 w-100">
+                    <select [(ngModel)]="triageType">
+                        <option value="0">Selecciona Triage</option>
+                        <option value="0">Niño</option>
+                        <option value="1">Mujer Adulta</option>
+                        <option value="2">Mujer Embarazada</option>
+                        <option value="3">Hombre Adulto</option>
+                    </select>
+                </div>
         </div>
 
         <!--Information-->
@@ -45,14 +52,14 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <input type="text" class="form-control form-control-line" #patientNames formControlFloat [(ngModel)]="_patientInfo.names">
                         <label>Nombres</label>
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <input type="text" class="form-control form-control-line" #patientLastNames formControlFloat [(ngModel)]="_patientInfo.lastNames">
                         <label>Apellidos</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -63,7 +70,8 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="number" class="form-control form-control-line" formControlFloat>
+                        <input type="text" class="form-control form-control-line" #patientAge formControlFloat [(ngModel)]="_patientInfo.age"
+                               (keypress)="restrictNumeric($event)">
                         <label>Edad</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -72,15 +80,15 @@
                     <div class="m-b-15 formText-color">Genero</div>
 
                     <label class="custom-control custom-radio">
-                        <input name="radio" type="radio" class="custom-control-input">
+                        <input name="gender" value="Masculino" type="radio"  class="custom-control-input" [(ngModel)]="_patientInfo.gender" (ngModelChange)="unfocusGenders()">
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Masculino</span>
+                        <span class="custom-control-description" #maleGender>Masculino</span>
                     </label>
 
                     <label class="custom-control custom-radio">
-                        <input name="radio" type="radio" class="custom-control-input">
+                        <input name="gender" value="Femenino" type="radio"  class="custom-control-input" [(ngModel)]="_patientInfo.gender" (ngModelChange)="unfocusGenders()">
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Femenino</span>
+                        <span class="custom-control-description" #femaleGender>Femenino</span>
                     </label>
                 </div>
             </div>
@@ -101,7 +109,8 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <input type="text" class="form-control form-control-line" #patientSocialNumber formControlFloat [(ngModel)]="_patientInfo.socialNumber"
+                               (keypress)="restrictNumeric($event)">
                         <label>Clave de seguro</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -112,14 +121,14 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <input type="text" class="form-control form-control-line" #patientBloodType formControlFloat [(ngModel)]="_patientInfo.bloodType">
                         <label>Tipo de sangre</label>
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat>
+                        <input type="text" class="form-control form-control-line" #patientAlergies formControlFloat [(ngModel)]="_patientInfo.alergies">
                         <label>Alergias</label>
                         <i class="form-group__bar"></i>
                     </div>
