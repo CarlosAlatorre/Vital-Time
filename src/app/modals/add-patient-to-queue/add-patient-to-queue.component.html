@@ -32,13 +32,27 @@
 
         </div>
     </div>
-
+  
     <!--Basic Information-->
     <div class="row" *ngIf="tab == 'basicInformation'">
 
-        <!--Patient photo-->
+        <!--Triage Type-->
         <div class="col-3">
-            <img src="../../../assets/img/img-profile-M.png" alt="Foto Paciente" class="patient-photo">
+            <!---Triage Photo--->
+            <img src="../../../assets/img/child.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==0">
+            <img src="../../../assets/img/women.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==1">
+            <img src="../../../assets/img/pregnant.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==2">
+            <img src="../../../assets/img/adult.png" alt="Foto Paciente" class="patient-photo ml-5" *ngIf="triageType==3">
+
+                <div class="ml-5 mt-4 w-100">
+                    <select [(ngModel)]="triageType">
+                        <option value="0">Selecciona Triage</option>
+                        <option value="0">Niño</option>
+                        <option value="1">Mujer Adulta</option>
+                        <option value="2">Mujer Embarazada</option>
+                        <option value="3">Hombre Adulto</option>
+                    </select>
+                </div>
         </div>
 
         <!--Information-->
@@ -48,14 +62,14 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.name">
+                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.name" #patientNames>
                         <label>Nombres</label>
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.lastName">
+                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.lastName" #patientLastNames>
                         <label>Apellidos</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -66,7 +80,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="number" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.age">
+                        <input type="number" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.age" #patientAge (keypress)="restrictNumeric($event)">
                         <label>Edad</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -75,15 +89,15 @@
                     <div class="m-b-15 formText-color">Genero</div>
 
                     <label class="custom-control custom-radio">
-                        <input name="radio" type="radio" class="custom-control-input" [(ngModel)]="patient.genero">
+                        <input name="gender" type="radio" class="custom-control-input" value="Masculino" [(ngModel)]="patient.genero" (ngModelChange)="unfocusGenders()">
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Masculino</span>
+                        <span class="custom-control-description" #maleGender>Masculino</span>
                     </label>
 
                     <label class="custom-control custom-radio">
-                        <input name="radio" type="radio" class="custom-control-input" [(ngModel)]="patient.genero">
+                        <input name="gender" value="Femenino" type="radio" class="custom-control-input" [(ngModel)]="patient.genero" (ngModelChange)="unfocusGenders()">
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Femenino</span>
+                        <span class="custom-control-description" #femaleGender>Femenino</span>
                     </label>
                 </div>
             </div>
@@ -104,7 +118,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.claveSeguro">
+                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.claveSeguro" #patientSocialNumber (keypress)="restrictNumeric($event)">
                         <label>Clave de seguro</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -115,14 +129,14 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.bloodType">
+                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.bloodType"  #patientBloodType>
                         <label>Tipo de sangre</label>
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.alergias">
+                        <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="patient.alergias" #patientAlergies>
                         <label>Alergias</label>
                         <i class="form-group__bar"></i>
                     </div>
