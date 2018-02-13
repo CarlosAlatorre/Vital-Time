@@ -11,6 +11,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
 import {ModalModule} from 'ngx-bootstrap';
 import { AddSymptomsComponent } from './modals/add-symptoms/add-symptoms.component';
+import { SearchSelectComponent } from './pages/search-select/search-select.component';
 defineLocale('es', esLocale);
 
 @NgModule({

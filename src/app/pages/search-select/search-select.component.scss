@@ -1,0 +1,26 @@
+.options{
+    width: 75%;
+    position: absolute;
+    height: 200px;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: white;
+    border: solid #95a5a6 1px;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.option-select{
+    margin-right: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    color: gray;
+    padding: 8px 15px;
+}
+
+.option-select:hover{
+    background-color: #5697fa;
+    color: white;
+}
+

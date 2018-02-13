@@ -1,3 +1,235 @@
-<p>
-  patient-assessment works!
-</p>
+<!--<div style="height: 400px; width: 700px" *ngIf="vm.isLoading">-->
+
+    <!--<div class="col-lg-offset-5 col-lg-6" style="margin-top: 20%">-->
+        <!--<div class="preloader pls-blue pl-xl" align="center">-->
+            <!--<svg class="pl-circular" viewBox="25 25 50 50">-->
+                <!--<circle class="plc-path" cx="50" cy="50" r="20"></circle>-->
+            <!--</svg>-->
+        <!--</div>-->
+    <!--</div>-->
+
+<!--</div>-->
+
+
+<!--<form name="pacienteForm" id="form" ng-submit="" *ngIf="!vm.isLoading">-->
+
+    <!--&lt;!&ndash;Body&ndash;&gt;-->
+    <!--<div class="modal-body modal-size p-l-15 p-r-15">-->
+        <!--<div class="row">-->
+
+            <!--&lt;!&ndash;Informaciòn basica&ndash;&gt;-->
+            <!--<div class="col-xs-4 d-p-detallesIzquierda">-->
+
+                <!--&lt;!&ndash;Foto del paciente&ndash;&gt;-->
+                <!--<div class="row" align="center">-->
+                    <!--<img src="../../img/user.png" alt="" class="d-p-foto">-->
+                <!--</div>-->
+
+                <!--&lt;!&ndash;Nombre del paciente&ndash;&gt;-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12" align="center">-->
+                        <!--<p class="d-p-nombre">{{ vm.patientInfo.nombres }} {{ vm.patientInfo.apellidos }}</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--&lt;!&ndash;Edad del paciente&ndash;&gt;-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12" align="center">-->
+                        <!--<p class="d-t-edad">{{ vm.patientInfo.edad }}</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--&lt;!&ndash;Informacion basica del paciente&ndash;&gt;-->
+
+                <!--&lt;!&ndash;Genero&ndash;&gt;-->
+                <!--<div class="row d-p-informacion">-->
+                    <!--<div class="col-xs-5">-->
+                        <!--Genero:-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-7">-->
+                        <!--{{ vm.patientInfo.genero == 'M' ? 'Masculino' : 'Femenino' }}-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--&lt;!&ndash;Fecha de nacimiento&ndash;&gt;-->
+                <!--<div class="row d-p-informacion">-->
+
+                    <!--<div class="col-xs-5">-->
+                        <!--Fecha Nacimiento-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-7">-->
+                        <!--{{ vm.getBirthDay(vm.patientInfo.fechaNacimiento) }}-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--&lt;!&ndash;Clave de seguro&ndash;&gt;-->
+                <!--<div class="row d-p-informacion">-->
+
+                    <!--<div class="col-xs-5">-->
+                        <!--Clave de seguro-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-7">-->
+                        <!--{{ vm.patientInfo.claveSeguro }}-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--&lt;!&ndash;Tipo de sangre&ndash;&gt;-->
+                <!--<div class="row d-p-informacion">-->
+
+                    <!--<div class="col-xs-5">-->
+                        <!--Tipo de sangre-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-7">-->
+                        <!--{{ vm.patientInfo.tipoSangre }}-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--&lt;!&ndash;Alergias&ndash;&gt;-->
+                <!--<div class="row d-p-informacion">-->
+
+                    <!--<div class="col-xs-5">-->
+                        <!--Alergias-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-7">-->
+                        <!--{{ vm.patientInfo.alergias }}-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+            <!--</div>-->
+
+            <!--&lt;!&ndash;Sintomas del paciente&ndash;&gt;-->
+            <!--<div class="col-xs-8 d-p-detallesDerecha">-->
+
+                <!--&lt;!&ndash;Requerimientos&ndash;&gt;-->
+                <!--<div class="row d-p-row-requerimientos">-->
+
+                    <!--<div class="col-xs-10" align="center">-->
+                        <!--Requiere: <span class="d-p-requerimientos"> <span-->
+                        <!--*ngFor="item in vm.patientSymptoms.requisitos">{{ item.nombre }}<span-->
+                        <!--*ngIf="!$last">, </span></span></span>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-2" align="center">-->
+                        <!--<i class="zmdi zmdi-close zmdi-hc-2x d-p-close-icon cursor-pointer"-->
+                           <!--(click)="vm.closeModalPatientDetails()"></i>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--&lt;!&ndash;Informacion de los sintomas&ndash;&gt;-->
+                <!--<div class="row d-p-detallesPaciente">-->
+
+                    <!--&lt;!&ndash;Informacion de pulso etc&ndash;&gt;-->
+                    <!--<div class="col-xs-6">-->
+
+                        <!--&lt;!&ndash;Pulso&ndash;&gt;-->
+                        <!--<div class="row d-p-rows-r">-->
+                            <!--<span>Pulso</span>-->
+                            <!--<div class="fg-line m-l-10">-->
+                                <!--<input type="text" name="clientName" class="form-control"-->
+                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.pulso" required>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--&lt;!&ndash;Presion Sintolica&ndash;&gt;-->
+                        <!--<div class="row d-p-rows-r">-->
+                            <!--<span>Presion arterial Sintolica</span>-->
+                            <!--<div class="fg-line m-l-10">-->
+                                <!--<input type="text" name="clientName" class="form-control"-->
+                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.presionSintolica" required>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--&lt;!&ndash;Presion Diastolica&ndash;&gt;-->
+                        <!--<div class="row d-p-rows-r">-->
+                            <!--<span>Presion arterial Diastolica</span>-->
+                            <!--<div class="fg-line m-l-10">-->
+                                <!--<input type="text" name="clientName" class="form-control"-->
+                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.presionDiastolica" required>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--&lt;!&ndash;Temperatura&ndash;&gt;-->
+                        <!--<div class="row d-p-rows-r">-->
+                            <!--<span>Temperatura</span>-->
+                            <!--<div class="fg-line m-l-10">-->
+                                <!--<input type="text" name="clientName" class="form-control"-->
+                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.temperatura" required>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--&lt;!&ndash;spO2&ndash;&gt;-->
+                        <!--<div class="row d-p-rows-r">-->
+                            <!--<span>spO2</span>-->
+                            <!--<div class="fg-line m-l-10">-->
+                                <!--<input type="text" name="clientName" class="form-control"-->
+                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.spO2" required>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+                    <!--&lt;!&ndash;Detalles de sintomas&ndash;&gt;-->
+                    <!--<div class="col-xs-6">-->
+
+                        <!--&lt;!&ndash;Lista de sintomas&ndash;&gt;-->
+                        <!--<div class="row d-p-sintomas">-->
+
+                            <!--<span style="margin-bottom: 5px">Sintomas</span>-->
+                            <!--<table class="table table-hover table-sintomas">-->
+
+                                <!--<tbody>-->
+
+                                <!--<tr *ngFor="sintoma in vm.patientSymptoms.sintomas">-->
+                                    <!--<td class="r-s-columnas">-->
+                                        <!--<div-->
+                                            <!--class="{{ sintoma.nivel == 'v' ? 'r-s-s-v' : (sintoma.nivel == 'n' ? 'r-s-s-n' : 'r-s-s-r') }}">-->
+                                            <!--<div class="row">-->
+                                                <!--<div class="col-xs-9 r-s-a-s">-->
+                                                    <!--{{ sintoma.nombre }}-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+
+                                <!--</tbody>-->
+
+                            <!--</table>-->
+
+                        <!--</div>-->
+
+                        <!--&lt;!&ndash;Observaciones&ndash;&gt;-->
+                        <!--<div class="row d-p-observaciones">-->
+
+                            <!--<div class="col-xs-12 m-t-5">-->
+                                <!--<span>Observaciones</span>-->
+                                <!--<div class="fg-line">-->
+                                    <!--<textarea name="observaciones" id="" cols="30" rows="4" class="form-control p-t-5"-->
+                                              <!--placeholder="Escribe aqui..."-->
+                                              <!--[(ngModel)]="vm.patientSymptoms.observaciones"></textarea>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+
+<!--</form>-->
+
