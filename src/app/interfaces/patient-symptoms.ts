@@ -9,10 +9,14 @@ import {QuestionsWoman} from './questions-woman';
 
 export interface PatientSymptoms {
     basicInformation:Patient
-    symptoms: Symptom[]
+    symptoms?: Symptom[]
     signosVitales:SignosVitales
     requireds:Requireds
     observaciones:string
     triageType:number
-    questions:QuestionsKid | QuestionsMan | QuestionsPregnant | QuestionsWoman
+    questions?:QuestionsKid | QuestionsMan | QuestionsPregnant | QuestionsWoman,
+    tiempoCola:number,
+    fechaLimite:string,
+    nivelPaciente:number
+    key:string;
 }

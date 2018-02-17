@@ -20,7 +20,7 @@
     <!--Search-->
     <div class="row m-t-15">
         <div class="offset-3 col-6">
-            <searchSelect></searchSelect>
+            <searchSelect [triageType]="triageType"></searchSelect>
         </div>
     </div>
 
@@ -40,13 +40,15 @@
 
         <!--Symptoms of patients-->
         <div *ngIf="symptomsOfPatients.length > 0" class="col-12">
+            <perfect-scrollbar>
             <div class="row">
                 <!--TODO: Cambiar la forma de obtener el color del background porque manda a llamar muchas veces al metodo-->
                 <div class="offset-medio col-2 symptom {{ getBackgroundColorBySymptom(symptom.level) }}" *ngFor="let symptom of symptomsOfPatients; let index = index">
-                    {{ symptom.name |  slice:0:15}}
+                    {{ symptom.name |  slice:0:14}}
                     <i class="zmdi zmdi-close-circle zmdi-hc-lg float-right m-t-3 cursor-pointer" (click)="deleteSymptom(index)"></i>
                 </div>
             </div>
+            </perfect-scrollbar>
         </div>
     </div>
 
@@ -59,100 +61,40 @@
     <div class="row" (click)="hideOptions()">
         <div class="offset-1 col-2">
             <div class="row p-l-10 p-r-10">
-                <div class="col-12 symptom m-b-10 symptom-lvl1">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl1">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl1">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl1">
-                    Diarrea
+                <div class="col-12 symptom m-b-10 symptom-lvl1 cursor-pointer" *ngFor="let symptom of frequentSymptomsRed" (click)="addSymptom(symptom)">
+                    {{ symptom.name |  slice:0:14}}
                 </div>
             </div>
         </div>
 
         <div class="col-2">
             <div class="row p-l-10 p-r-10">
-                <div class="col-12 symptom m-b-10 symptom-lvl2">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl2">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl2">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl2">
-                    Diarrea
+                <div class="col-12 symptom m-b-10 symptom-lvl2 cursor-pointer" *ngFor="let symptom of frequentSymptomsOrange" (click)="addSymptom(symptom)">
+                    {{ symptom.name |  slice:0:14}}
                 </div>
             </div>
         </div>
 
         <div class="col-2">
             <div class="row p-l-5 p-r-5">
-                <div class="col-12 symptom m-b-10 symptom-lvl3">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl3">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl3">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl3">
-                    Diarrea
+                <div class="col-12 symptom m-b-10 symptom-lvl3 cursor-pointer" *ngFor="let symptom of frequentSymptomsYellow" (click)="addSymptom(symptom)">
+                    {{ symptom.name |  slice:0:14}}
                 </div>
             </div>
         </div>
 
         <div class="col-2">
             <div class="row p-l-5 p-r-5">
-                <div class="col-12 symptom m-b-10 symptom-lvl4">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl4">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl4">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl4">
-                    Diarrea
+                <div class="col-12 symptom m-b-10 symptom-lvl4 cursor-pointer" *ngFor="let symptom of frequentSymptomsGreen" (click)="addSymptom(symptom)">
+                    {{ symptom.name |  slice:0:14}}
                 </div>
             </div>
         </div>
 
         <div class="col-2">
             <div class="row p-l-5 p-r-5">
-                <div class="col-12 symptom m-b-10 symptom-lvl5">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl5">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl5">
-                    Diarrea
-                </div>
-
-                <div class="col-12 symptom m-b-10 symptom-lvl5">
-                    Diarrea
+                <div class="col-12 symptom m-b-10 symptom-lvl5 cursor-pointer" *ngFor="let symptom of frequentSymptomsBlue" (click)="addSymptom(symptom)">
+                    {{ symptom.name |  slice:0:14}}
                 </div>
             </div>
         </div>

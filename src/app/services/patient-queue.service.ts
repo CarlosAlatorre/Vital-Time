@@ -10,7 +10,8 @@ export class PatientQueueService {
     }
 
     addPatientToQueue(patient: PatientSymptoms) {
-        this._db.list('Queue').push(patient);
+        let patientKey = this._db.list('Queue').push(patient).key;
+        this._db.list('Queue').update(patientKey, {'key': patientKey});
     }
 
     removePatientOfQueue(patientKey: string) {
@@ -27,6 +28,18 @@ export class PatientQueueService {
     }
 
     getQueue() {
-        this._db.list('Queue').valueChanges();
+        return this._db.list('Queue').valueChanges();
+    }
+
+    getNotification(){
+        return this._db.object('notification').valueChanges()
+    }
+
+    sendNotification(){
+        this._db.object('notification').update({alarma: true});
+    }
+
+    closeNotification(){
+        this._db.object('notification').update({alarma: false});
     }
 }

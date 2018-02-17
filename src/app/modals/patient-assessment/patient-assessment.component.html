@@ -1,235 +1,252 @@
-<!--<div style="height: 400px; width: 700px" *ngIf="vm.isLoading">-->
+<section class="p-l-15 p-r-15">
+    <div class="row">
 
-    <!--<div class="col-lg-offset-5 col-lg-6" style="margin-top: 20%">-->
-        <!--<div class="preloader pls-blue pl-xl" align="center">-->
-            <!--<svg class="pl-circular" viewBox="25 25 50 50">-->
-                <!--<circle class="plc-path" cx="50" cy="50" r="20"></circle>-->
-            <!--</svg>-->
-        <!--</div>-->
-    <!--</div>-->
+        <!--Informaciòn basica-->
+        <div class="col-4 d-p-detallesIzquierda">
 
-<!--</div>-->
+            <!--Foto del paciente-->
+            <div class="row" align="center">
+                <!--<img src="../../img/user.png" alt="" class="d-p-foto">-->
+                <div class="col-12">
+                    <img src="../../../assets/img/child.png" alt="Foto Paciente" class="d-p-foto"
+                         *ngIf="patient.triageType==triageTypeEnum.KID">
+                    <img src="../../../assets/img/women.png" alt="Foto Paciente" class="d-p-foto"
+                         *ngIf="patient.triageType==triageTypeEnum.WOMAN">
+                    <img src="../../../assets/img/pregnant.png" alt="Foto Paciente" class="d-p-foto"
+                         *ngIf="patient.triageType==triageTypeEnum.PREGNANT">
+                    <img src="../../../assets/img/adult.png" alt="Foto Paciente" class="d-p-foto"
+                         *ngIf="patient.triageType==triageTypeEnum.ADULTMALE">
+                </div>
+            </div>
 
+            <!--Nombre del paciente-->
+            <div class="row">
+                <div class="col-12" align="center">
+                    <p class="d-p-nombre">{{ patient?.basicInformation.name }} {{ patient?.basicInformation.lastName
+                        }}</p>
+                </div>
+            </div>
 
-<!--<form name="pacienteForm" id="form" ng-submit="" *ngIf="!vm.isLoading">-->
+            <!--Edad del paciente-->
+            <div class="row">
+                <div class="col-12" align="center">
+                    <p class="d-t-edad">{{ patient?.basicInformation.age }} años</p>
+                </div>
+            </div>
 
-    <!--&lt;!&ndash;Body&ndash;&gt;-->
-    <!--<div class="modal-body modal-size p-l-15 p-r-15">-->
-        <!--<div class="row">-->
+            <!--Informacion basica del paciente-->
 
-            <!--&lt;!&ndash;Informaciòn basica&ndash;&gt;-->
-            <!--<div class="col-xs-4 d-p-detallesIzquierda">-->
+            <!--Genero-->
+            <div class="row d-p-informacion">
+                <div class="col-5">
+                    Genero:
+                </div>
 
-                <!--&lt;!&ndash;Foto del paciente&ndash;&gt;-->
-                <!--<div class="row" align="center">-->
-                    <!--<img src="../../img/user.png" alt="" class="d-p-foto">-->
-                <!--</div>-->
+                <div class="col-7">
+                    {{ patient?.basicInformation.genero == 'Masculino' ? 'Masculino' : 'Femenino' }}
+                </div>
+            </div>
 
-                <!--&lt;!&ndash;Nombre del paciente&ndash;&gt;-->
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-12" align="center">-->
-                        <!--<p class="d-p-nombre">{{ vm.patientInfo.nombres }} {{ vm.patientInfo.apellidos }}</p>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--Fecha de nacimiento-->
+            <div class="row d-p-informacion">
 
-                <!--&lt;!&ndash;Edad del paciente&ndash;&gt;-->
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-12" align="center">-->
-                        <!--<p class="d-t-edad">{{ vm.patientInfo.edad }}</p>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div class="col-5">
+                    Fecha Nacimiento
+                </div>
 
-                <!--&lt;!&ndash;Informacion basica del paciente&ndash;&gt;-->
+                <div class="col-7">
+                    {{ getBirthday(patient?.basicInformation.birthday) }}
+                </div>
 
-                <!--&lt;!&ndash;Genero&ndash;&gt;-->
-                <!--<div class="row d-p-informacion">-->
-                    <!--<div class="col-xs-5">-->
-                        <!--Genero:-->
-                    <!--</div>-->
+            </div>
 
-                    <!--<div class="col-xs-7">-->
-                        <!--{{ vm.patientInfo.genero == 'M' ? 'Masculino' : 'Femenino' }}-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--Clave de seguro-->
+            <div class="row d-p-informacion">
 
-                <!--&lt;!&ndash;Fecha de nacimiento&ndash;&gt;-->
-                <!--<div class="row d-p-informacion">-->
+                <div class="col-5">
+                    Clave de seguro
+                </div>
 
-                    <!--<div class="col-xs-5">-->
-                        <!--Fecha Nacimiento-->
-                    <!--</div>-->
+                <div class="col-7">
+                    {{ patient?.basicInformation.claveSeguro }}
+                </div>
 
-                    <!--<div class="col-xs-7">-->
-                        <!--{{ vm.getBirthDay(vm.patientInfo.fechaNacimiento) }}-->
-                    <!--</div>-->
+            </div>
 
-                <!--</div>-->
+            <!--Tipo de sangre-->
+            <div class="row d-p-informacion">
 
-                <!--&lt;!&ndash;Clave de seguro&ndash;&gt;-->
-                <!--<div class="row d-p-informacion">-->
+                <div class="col-5">
+                    Tipo de sangre
+                </div>
 
-                    <!--<div class="col-xs-5">-->
-                        <!--Clave de seguro-->
-                    <!--</div>-->
+                <div class="col-7">
+                    {{ patient?.basicInformation.bloodType }}
+                </div>
 
-                    <!--<div class="col-xs-7">-->
-                        <!--{{ vm.patientInfo.claveSeguro }}-->
-                    <!--</div>-->
+            </div>
 
-                <!--</div>-->
+            <!--Alergias-->
+            <div class="row d-p-informacion">
 
-                <!--&lt;!&ndash;Tipo de sangre&ndash;&gt;-->
-                <!--<div class="row d-p-informacion">-->
+                <div class="col-5">
+                    Alergias
+                </div>
 
-                    <!--<div class="col-xs-5">-->
-                        <!--Tipo de sangre-->
-                    <!--</div>-->
+                <div class="col-7">
+                    {{ patient?.basicInformation.alergias }}
+                </div>
 
-                    <!--<div class="col-xs-7">-->
-                        <!--{{ vm.patientInfo.tipoSangre }}-->
-                    <!--</div>-->
+            </div>
 
-                <!--</div>-->
+            <div class="row d-p-informacion">
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary" (click)="openQuestions()">Ver preguntas</button>
+                </div>
+            </div>
 
-                <!--&lt;!&ndash;Alergias&ndash;&gt;-->
-                <!--<div class="row d-p-informacion">-->
+        </div>
 
-                    <!--<div class="col-xs-5">-->
-                        <!--Alergias-->
-                    <!--</div>-->
+        <!--Sintomas del paciente-->
+        <div class="col-8 d-p-detallesDerecha">
 
-                    <!--<div class="col-xs-7">-->
-                        <!--{{ vm.patientInfo.alergias }}-->
-                    <!--</div>-->
+            <!--Requerimientos-->
+            <div class="row d-p-row-requerimientos">
 
-                <!--</div>-->
+                <div class="col-10" align="center">
+                    Requiere:
+                    <span class="d-p-requerimientos">
+                        <span *ngIf="patient?.requireds.rayosx">Rayos x,</span>
+                        <span *ngIf="patient?.requireds.salaChoque">Sala de Choques,</span>
+                        <span *ngIf="patient?.requireds.analisisClinicos">Analisis Clinicos,</span>
+                        <span *ngIf="patient?.requireds.tomografia">Tomografia,</span>
+                        <span *ngIf="patient?.requireds.ultrasonido">Ultrasonido,</span>
+                        <span *ngIf="patient?.requireds.cirugia">Cirugia,</span>
+                    </span>
+                </div>
 
-            <!--</div>-->
+                <div class="col-2" align="center">
+                    <i class="zmdi zmdi-close zmdi-hc-2x d-p-close-icon cursor-pointer text-danger"
+                       (click)="closeModal()"></i>
+                </div>
 
-            <!--&lt;!&ndash;Sintomas del paciente&ndash;&gt;-->
-            <!--<div class="col-xs-8 d-p-detallesDerecha">-->
+            </div>
 
-                <!--&lt;!&ndash;Requerimientos&ndash;&gt;-->
-                <!--<div class="row d-p-row-requerimientos">-->
+            <!--Informacion de los sintomas-->
+            <div class="row d-p-detallesPaciente">
 
-                    <!--<div class="col-xs-10" align="center">-->
-                        <!--Requiere: <span class="d-p-requerimientos"> <span-->
-                        <!--*ngFor="item in vm.patientSymptoms.requisitos">{{ item.nombre }}<span-->
-                        <!--*ngIf="!$last">, </span></span></span>-->
-                    <!--</div>-->
+                <!--Informacion de pulso etc-->
+                <div class="col-6">
 
-                    <!--<div class="col-xs-2" align="center">-->
-                        <!--<i class="zmdi zmdi-close zmdi-hc-2x d-p-close-icon cursor-pointer"-->
-                           <!--(click)="vm.closeModalPatientDetails()"></i>-->
-                    <!--</div>-->
+                    <!--Pulso-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Pulso</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line"
+                                       [(ngModel)]="patient?.signosVitales.pulso">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
 
-                <!--</div>-->
+                    <!--Presion Sintolica-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Presion arterial Sintolica</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line"
+                                       [(ngModel)]="patient?.signosVitales.presionArterialSintolica">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
 
-                <!--&lt;!&ndash;Informacion de los sintomas&ndash;&gt;-->
-                <!--<div class="row d-p-detallesPaciente">-->
+                    <!--Presion Diastolica-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Presion arterial Diastolica</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line"
+                                       [(ngModel)]="patient?.signosVitales.presionArterialDiastolica">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!--&lt;!&ndash;Informacion de pulso etc&ndash;&gt;-->
-                    <!--<div class="col-xs-6">-->
+                    <!--Temperatura-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Temperatura</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line"
+                                       [(ngModel)]="patient?.signosVitales.temperatura">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
 
-                        <!--&lt;!&ndash;Pulso&ndash;&gt;-->
-                        <!--<div class="row d-p-rows-r">-->
-                            <!--<span>Pulso</span>-->
-                            <!--<div class="fg-line m-l-10">-->
-                                <!--<input type="text" name="clientName" class="form-control"-->
-                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.pulso" required>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                    <!--spO2-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">spO2</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line"
+                                       [(ngModel)]="patient?.signosVitales.spo2">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
 
-                        <!--&lt;!&ndash;Presion Sintolica&ndash;&gt;-->
-                        <!--<div class="row d-p-rows-r">-->
-                            <!--<span>Presion arterial Sintolica</span>-->
-                            <!--<div class="fg-line m-l-10">-->
-                                <!--<input type="text" name="clientName" class="form-control"-->
-                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.presionSintolica" required>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                </div>
 
-                        <!--&lt;!&ndash;Presion Diastolica&ndash;&gt;-->
-                        <!--<div class="row d-p-rows-r">-->
-                            <!--<span>Presion arterial Diastolica</span>-->
-                            <!--<div class="fg-line m-l-10">-->
-                                <!--<input type="text" name="clientName" class="form-control"-->
-                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.presionDiastolica" required>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                <!--Detalles de sintomas-->
+                <div class="col-6">
 
-                        <!--&lt;!&ndash;Temperatura&ndash;&gt;-->
-                        <!--<div class="row d-p-rows-r">-->
-                            <!--<span>Temperatura</span>-->
-                            <!--<div class="fg-line m-l-10">-->
-                                <!--<input type="text" name="clientName" class="form-control"-->
-                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.temperatura" required>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                    <!--Lista de sintomas-->
+                    <div class="row d-p-sintomas">
 
-                        <!--&lt;!&ndash;spO2&ndash;&gt;-->
-                        <!--<div class="row d-p-rows-r">-->
-                            <!--<span>spO2</span>-->
-                            <!--<div class="fg-line m-l-10">-->
-                                <!--<input type="text" name="clientName" class="form-control"-->
-                                       <!--[(ngModel)]="vm.patientSymptoms.detalles.spO2" required>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                        <div class="col-12">
+                            <span style="margin-bottom: 5px">Sintomas</span>
+                            <table class="table table-hover table-sintomas">
 
-                    <!--</div>-->
+                                <tbody>
+                                <tr *ngFor="let sintoma of patient?.symptoms">
+                                    <td class="r-s-columnas">
+                                        <div
+                                            class="{{ sintoma.level == levelSymptoms.GREEN ? 'r-s-s-v' : (sintoma.level == levelSymptoms.ORANGE ? 'r-s-s-n' : (sintoma.level == levelSymptoms.YELLOW ? 'r-s-s-am' : (sintoma.level == levelSymptoms.BLUE ? 'r-s-s-az' : 'r-s-s-r' ))) }}">
+                                            <div class="row">
+                                                <div class="col-9 r-s-a-s">
+                                                    {{ sintoma.name | slice:0:18}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                    <!--&lt;!&ndash;Detalles de sintomas&ndash;&gt;-->
-                    <!--<div class="col-xs-6">-->
+                                </tbody>
 
-                        <!--&lt;!&ndash;Lista de sintomas&ndash;&gt;-->
-                        <!--<div class="row d-p-sintomas">-->
+                            </table>
+                        </div>
 
-                            <!--<span style="margin-bottom: 5px">Sintomas</span>-->
-                            <!--<table class="table table-hover table-sintomas">-->
+                    </div>
 
-                                <!--<tbody>-->
+                    <!--Observaciones-->
+                    <div class="row d-p-observaciones">
 
-                                <!--<tr *ngFor="sintoma in vm.patientSymptoms.sintomas">-->
-                                    <!--<td class="r-s-columnas">-->
-                                        <!--<div-->
-                                            <!--class="{{ sintoma.nivel == 'v' ? 'r-s-s-v' : (sintoma.nivel == 'n' ? 'r-s-s-n' : 'r-s-s-r') }}">-->
-                                            <!--<div class="row">-->
-                                                <!--<div class="col-xs-9 r-s-a-s">-->
-                                                    <!--{{ sintoma.nombre }}-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</td>-->
-                                <!--</tr>-->
-
-                                <!--</tbody>-->
-
-                            <!--</table>-->
-
-                        <!--</div>-->
-
-                        <!--&lt;!&ndash;Observaciones&ndash;&gt;-->
-                        <!--<div class="row d-p-observaciones">-->
-
-                            <!--<div class="col-xs-12 m-t-5">-->
-                                <!--<span>Observaciones</span>-->
-                                <!--<div class="fg-line">-->
-                                    <!--<textarea name="observaciones" id="" cols="30" rows="4" class="form-control p-t-5"-->
-                                              <!--placeholder="Escribe aqui..."-->
-                                              <!--[(ngModel)]="vm.patientSymptoms.observaciones"></textarea>-->
-                                <!--</div>-->
-                            <!--</div>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-
-                <!--</div>-->
-
-            <!--</div>-->
-
-        <!--</div>-->
-    <!--</div>-->
-
-<!--</form>-->
-
+                        <div class="col-12 m-t-5">
+                            <span>Observaciones</span>
+                            <div class="fg-line">
+                                    <textarea name="observaciones" id="" cols="30" rows="4"
+                                              class="form-control form-control-line p-t-5"
+                                              placeholder="Escribe aqui..."
+                                              [(ngModel)]="patient.observaciones"></textarea>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

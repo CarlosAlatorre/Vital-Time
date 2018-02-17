@@ -1,4 +1,4 @@
-.timer{
+.timer {
     border-radius: 25px 25px 25px 25px;
     color: white;
     padding-left: 10px;
@@ -6,5 +6,49 @@
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: bold;
-    width: 65px;
+    width: 75px;
+}
+
+.symptom-lvl1 {
+    background-color: #e74c3c;
+}
+
+.symptom-lvl2 {
+    background-color: #e67e22;
+}
+
+.symptom-lvl3 {
+    background-color: #f39c12;
+}
+
+.symptom-lvl4 {
+    background-color: #2ecc71;
+}
+
+.symptom-lvl5 {
+    background-color: #3498db;
+}
+
+.title {
+    font-size: 18px;
+    margin-top: 0px;
+}
+
+.message {
+    font-size: 14px;
+}
+
+.notification {
+    color: white;
+    background-color: #e74c3c;
+    height: 100px;
+    /*width: 300px;*/
+    padding: 20px;
+}
+
+.close-button:after{
+    content: "x";
+    color: #fff;
+    font-size: 17px;
+    font-weight: 100;
 }

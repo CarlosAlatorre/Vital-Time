@@ -32,6 +32,13 @@ import {SymptomsService} from '../services/symptoms.service';
 import {AlertService} from '../services/alert.service';
 import {ValidationService} from '../services/validation.service';
 import {PatientQueueService} from '../services/patient-queue.service';
+import {CountdownTimerModule} from 'ngx-countdown-timer';
+import {LimitToPipe} from '../pipes/limit-to.pipe';
+import {GrowlComponent} from '../components/growl/growl.component';
+import {PatientService} from '../services/patient.service';
+import {QuestionsOfPatientsComponent} from '../modals/questions-of-patients/questions-of-patients.component';
+import {AmbulanciaComponent} from '../pages/ambulancia/ambulancia.component';
+
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -49,7 +56,11 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PatientAssessmentComponent,
         AddPatientToQueueComponent,
         AddSymptomsComponent,
-        SearchSelectComponent
+        SearchSelectComponent,
+        LimitToPipe,
+        GrowlComponent,
+        QuestionsOfPatientsComponent,
+        AmbulanciaComponent
     ],
     providers: [
         Globals,
@@ -57,7 +68,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SymptomsService,
         AlertService,
         ValidationService,
-        PatientQueueService
+        PatientQueueService,
+        PatientService
     ],
     imports: [
         CommonModule,
@@ -73,13 +85,15 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ModalModule.forRoot(),
         Select2Module,
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        CountdownTimerModule,
     ],
     entryComponents: [
         NewPatientComponent,
         PatientAssessmentComponent,
         AddPatientToQueueComponent,
-        AddSymptomsComponent
+        AddSymptomsComponent,
+        QuestionsOfPatientsComponent
     ]
 })
 

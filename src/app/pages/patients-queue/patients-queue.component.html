@@ -1,23 +1,22 @@
 <section class="content">
-
     <div class="card p-l-20 p-r-20" style="height: 80vh">
         <!--Filters-->
         <div class="row p-t-20">
             <div class="offset-3 col-1 p-r-5 text-right">
-                <i class="zmdi zmdi-search zmdi-hc-lg" style="position: relative; top: 8px;"></i>
+                <!--<i class="zmdi zmdi-search zmdi-hc-lg" style="position: relative; top: 8px;"></i>-->
             </div>
-            <div class="col-2  p-l-5">
-                <div class="form-group">
-                    <input type="text" class="form-control form-control-line" placeholder="Buscar por nombre">
-                    <i class="form-group__bar"></i>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <input type="text" class="form-control form-control-line" placeholder="Buscar por clave de seguro">
-                    <i class="form-group__bar"></i>
-                </div>
-            </div>
+            <!--<div class="col-2  p-l-5">-->
+            <!--<div class="form-group">-->
+            <!--<input type="text" class="form-control form-control-line" placeholder="Buscar por nombre">-->
+            <!--<i class="form-group__bar"></i>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-3">-->
+            <!--<div class="form-group">-->
+            <!--<input type="text" class="form-control form-control-line" placeholder="Buscar por clave de seguro">-->
+            <!--<i class="form-group__bar"></i>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
 
         <!--Patients Queue-->
@@ -35,23 +34,137 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>
-                            Carlos Alatorre
+                    <!--Patients Red-->
+                    <tr *ngFor="let patient of patientsRed">
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation.name + ' ' + patient.basicInformation.lastName }}
                         </td>
-                        <td>
-                            13330414
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation?.claveSeguro }}
                         </td>
-                        <td>
-                            Tos leve
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <span *ngFor="let symptom of patient.symptoms; let last = last, let index = index">
+                                <span *ngIf="index < 5">
+                                {{ symptom.name }}<span *ngIf="!last">,</span>
+                                </span>
+                            </span>
                         </td>
-                        <td>
-                            <div class="timer text-center bg-warning">
-                                1:15:30
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <div class="timer text-center {{ getBackgroundColorBySymptom(patient.nivelPaciente) }}">
+                                <countdown-timer [end]="patient.tiempoCola"></countdown-timer>
                             </div>
                         </td>
                         <td>
-                            <button class="btn btn-success">Pasar paciente</button>
+                            <i class="zmdi zmdi-close zmdi-hc-2x text-danger cursor-pointer"
+                               (click)="removePatientFromQueue(patient.key)"></i>
+                        </td>
+                    </tr>
+
+                    <!--Patients Orange-->
+                    <tr *ngFor="let patient of patientsOrange">
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation.name + ' ' + patient.basicInformation.lastName }}
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation?.claveSeguro }}
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <span *ngFor="let symptom of patient.symptoms; let last = last; let index = index">
+                                <span *ngIf="index < 5">
+                                    {{ symptom.name }}<span *ngIf="!last">,</span>
+                                </span>
+                            </span>
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <div class="timer text-center {{ getBackgroundColorBySymptom(patient.nivelPaciente) }}">
+                                <countdown-timer [end]="patient.tiempoCola"></countdown-timer>
+
+                            </div>
+                        </td>
+                        <td>
+                            <i class="zmdi zmdi-close zmdi-hc-2x text-danger cursor-pointer"
+                               (click)="removePatientFromQueue(patient.key)"></i>
+                        </td>
+                    </tr>
+
+                    <!--Patients Yellow-->
+                    <tr *ngFor="let patient of patientsYellow">
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation.name + ' ' + patient.basicInformation.lastName }}
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation?.claveSeguro }}
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <span *ngFor="let symptom of patient.symptoms; let last = last, let index = index">
+                                <span *ngIf="index < 5">
+                                {{ symptom.name }}<span *ngIf="!last">,</span>
+                                </span>
+                            </span>
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <div class="timer text-center {{ getBackgroundColorBySymptom(patient.nivelPaciente) }}">
+                                <countdown-timer [end]="patient.tiempoCola"></countdown-timer>
+
+                            </div>
+                        </td>
+                        <td>
+                            <i class="zmdi zmdi-close zmdi-hc-2x text-danger cursor-pointer"
+                               (click)="removePatientFromQueue(patient.key)"></i>
+                        </td>
+                    </tr>
+
+                    <!--Patients Green-->
+                    <tr *ngFor="let patient of patientsGreen">
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation.name + ' ' + patient.basicInformation.lastName }}
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation?.claveSeguro }}
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <span *ngFor="let symptom of patient.symptoms; let last = last, let index = index">
+                                <span *ngIf="index < 5">
+                                {{ symptom.name }}<span *ngIf="!last">,</span>
+                                </span>
+                            </span>
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <div class="timer text-center {{ getBackgroundColorBySymptom(patient.nivelPaciente) }}">
+                                <countdown-timer [end]="patient.tiempoCola"></countdown-timer>
+
+                            </div>
+                        </td>
+                        <td>
+                            <i class="zmdi zmdi-close zmdi-hc-2x text-danger cursor-pointer"
+                               (click)="removePatientFromQueue(patient.key)"></i>
+                        </td>
+                    </tr>
+
+                    <!--Patients Blue-->
+                    <tr *ngFor="let patient of patientsBlue">
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation.name + ' ' + patient.basicInformation.lastName }}
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            {{ patient.basicInformation?.claveSeguro }}
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <span *ngFor="let symptom of patient.symptoms; let last = last, let index = index">
+                                <span *ngIf="index < 5">
+                                {{ symptom.name }}<span *ngIf="!last">,</span>
+                                </span>
+                            </span>
+                        </td>
+                        <td (click)="openPatientAssessment(patient.key)">
+                            <div class="timer text-center {{ getBackgroundColorBySymptom(patient.nivelPaciente) }}">
+                                <countdown-timer [end]="patient.tiempoCola"></countdown-timer>
+
+                            </div>
+                        </td>
+                        <td>
+                            <i class="zmdi zmdi-close zmdi-hc-2x text-danger cursor-pointer"
+                               (click)="removePatientFromQueue(patient.key)"></i>
                         </td>
                     </tr>
                     </tbody>
@@ -72,52 +185,48 @@
                             <input type="text"
                                    class="form-control p-l-5 m-t-5 bg-white"
                                    placeholder="Ejemplo: 13020203"
-                                   required>
+                                   required
+                                   [(ngModel)]="patientKey">
                             <!--</div>-->
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="offset-2 col-8 m-t-15">
-                            <button class="btn btn-danger" style="width: 100%; border-radius: 5px 5px 5px 5px; background-color: #e74c3c !important;" (click)="openAddPatient()">Registrar</button>
+                            <button class="btn btn-danger"
+                                    style="width: 100%; border-radius: 5px 5px 5px 5px; background-color: #e74c3c !important;"
+                                    (click)="openAddPatient()">Registrar
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <div class="c-p-crear-paciente" style="text-align: center; color: #4498db;">
-
                     <span class="c-p-label-crear cursor-pointer">Crear nuevo paciente</span>
-
                 </div>
 
-                <div *ngIf="false">
+                <div class="row m-t-50" *ngIf="showNotification">
+                    <div class="col-12" style="vertical-align: middle;" align="center">
 
-                    <input type="text" class="form-control" ng-model="vm.nuevoSintoma.nombre" placeholder="Nombre del sintoma">
-                    <select class="form-control">
-                        <option selected="selected" value="">Nivel de sintoma</option>
-                        <option value="az">Azul</option>
-                        <option value="v">Verde</option>
-                        <option value="a">Amarillo</option>
-                        <option value="n">Naranja</option>
-                        <option value="r">Rojo</option>
-                    </select>
-                    <select class="form-control">
-                        <option selected="selected" value="">Tipo de triage</option>
-                        <option value="obstetrico">Obstetrico</option>
-                        <option value="Adulto">Adulto</option>
-                        <option value="Pediatrico">Pediatrico</option>
-                    </select>
-
-                    <button class="btn btn-primary">Agregar sintoma</button>
-
+                        <div class="notification animated {{ animatedIcon ? 'tada' : '' }} cursor-pointer" (click)="closeNotification()">
+                            <div class="title">
+                                EMERGENCIA
+                            </div>
+                            <div class="message">
+                                <div>Paciente en camino</div>
+                                <div>Ambulancia a 3km</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="false">
             <div class="col-6">
-                <input type="text" class="form-control form-control-line" [(ngModel)]="symptom.name" placeholder="Nombre del sintoma">
+                <input type="text" class="form-control form-control-line" [(ngModel)]="symptom.name"
+                       placeholder="Nombre del sintoma">
                 <select class="form-control form-control-line" [(ngModel)]="symptom.level">
-                    <option [value]="levelSymptom.RED">Rojo</option>
+                    <option [value]="levelSymptom.RED"> Rojo </option>
                     <option [value]="levelSymptom.ORANGE">Naranja</option>
                     <option [value]="levelSymptom.YELLOW">Amarillo</option>
                     <option [value]="levelSymptom.GREEN">Verde</option>
@@ -155,7 +264,8 @@
                             {{ getTriageType(symptom.triage) }}
                         </td>
                         <td>
-                            <i class="zmdi zmdi-close-circle text-danger zmdi-hc-2x cursor-pointer" (click)="deleteSymptom(symptom.key)"></i>
+                            <i class="zmdi zmdi-close-circle text-danger zmdi-hc-2x cursor-pointer"
+                               (click)="deleteSymptom(symptom.key)"></i>
                         </td>
                     </tr>
                     </tbody>
@@ -165,3 +275,5 @@
     </div>
 
 </section>
+
+<growl [title]="growlTitle" [showGrowl]="showGrowl"></growl>

@@ -62,3 +62,11 @@
 .swal2-confirm{
     margin-left: 10px;
 }
+
+bs-datepicker-container, bs-daterangepicker-container{
+    z-index: 2001 !important;
+}
+
+.ps-content{
+    overflow-x: hidden !important;
+}

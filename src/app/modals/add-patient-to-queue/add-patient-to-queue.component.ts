@@ -7,18 +7,16 @@ import {Requireds} from '../../interfaces/requireds';
 import {Patient} from '../../interfaces/patient';
 import {QuestionsMan} from '../../interfaces/questions-man';
 import {QuestionsWoman} from '../../interfaces/questions-woman';
-import {QuestionsPregnant} from '../../interfaces/questions-pregnant';
 import {QuestionsKid} from '../../interfaces/questions-kid';
-import {ValidationService} from '../../services/validation.service';
 import {PatientQueueService} from '../../services/patient-queue.service';
 import {PatientSymptoms} from '../../interfaces/patient-symptoms';
-import {TRIAGETYPE} from '../../enums/triagetype.enum';
 import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {Select2OptionData} from 'ng2-select2';
-import {PatientInfo} from '../../interfaces/patient-info';
-import {ValidationService} from '../../shared/services/validation.service';
-import {isGeneratedFile} from '@angular/compiler/src/aot/util';
-import {TRIAGETYPE} from '../../enums/enums';
+import {TRIAGETYPE} from '../../enums/triagetype.enum';
+import {ValidationService} from '../../services/validation.service';
+import {LEVELSYMPTOM} from '../../enums/level-symptom.enum';
+import {Symptom} from '../../interfaces/symptom';
+import * as _ from 'lodash';
+import {PatientService} from '../../services/patient.service';
 
 @Component({
     selector: 'app-add-patient-to-queue',
@@ -28,25 +26,84 @@ import {TRIAGETYPE} from '../../enums/enums';
 export class AddPatientToQueueComponent implements OnInit {
 
     bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, {containerClass: 'theme-dark-blue'});
-    bsValue: Date = new Date();
     locale = 'es';
-    medicamento: string;
     symptoms: any[] = [];
-    signosVitales: SignosVitales = {} as SignosVitales;
-    requireds: Requireds = {} as Requireds;
-    patient: Patient = {} as Patient;
-    triageType: number;
-    observaciones: string;
-    questionsMan: QuestionsMan = {} as QuestionsMan;
-    questionsWoman: QuestionsWoman = {} as QuestionsWoman;
-    questionsKid: QuestionsKid = {} as QuestionsKid;
-    tab:string = 'basicInformation';
+    signosVitales: SignosVitales = {
+        pulso: '',
+        presionArterialSintolica: '',
+        presionArterialDiastolica: '',
+        temperatura: '',
+        spo2: ''
+    };
+    requireds: Requireds = {
+        rayosx: false,
+        salaChoque: false,
+        analisisClinicos: false,
+        tomografia: false,
+        ultrasonido: false,
+        cirugia: false
+    };
+    patient: Patient = {
+        name: '',
+        lastName: '',
+        age: 0,
+        genero: '',
+        birthday: '',
+        claveSeguro: 0,
+        bloodType: '',
+        alergias: ''
+    };
+    questionsMan: QuestionsMan = {
+        tiempoPresentandoSintomas: '',
+        consumoMedicamentos: false,
+        cuandoMedicamentos: '',
+        cualesMedicamentos: '',
+        cirugiasPrevias: false,
+        cualesCirugias: '',
+        cuandoCirugias: '',
+    };
+    questionsWoman: QuestionsWoman = {
+        tiempoPresentandoSintomas: '',
+        consumoMedicamentos: false,
+        cuandoMedicamentos: '',
+        cualesMedicamentos: '',
+        cirugiasPrevias: false,
+        cualesCirugias: '',
+        cuandoCirugias: '',
+        ultimaMenstruacion: '',
+        embarazos: 0,
+        partos: 0,
+        abortos: 0,
+        lactancia: false
+    };
+    questionsKid: QuestionsKid = {
+        tiempoPresentandoSintomas: '',
+        consumoMedicamentos: false,
+        cuandoMedicamentos: '',
+        cualesMedicamentos: '',
+        cirugiasPrevias: false,
+        cualesCirugias: '',
+        cuandoCirugias: '',
+        tipoDieta: '',
+        ultimaComida: '',
+        tipoParto: '',
+        escuela: false,
+        fueHoy: false,
+        estado: '',
+    };
+    triageType: number = TRIAGETYPE.KID;
+    observaciones: string = '';
+    tab: string = 'chooseTriage';
+    triageEnum: any = TRIAGETYPE;
+    womanPregnant: boolean = false;
 
     constructor(private _localeService: BsLocaleService,
                 private _modalService: BsModalService,
                 private _modal: BsModalRef,
                 private _broadCastService: Broadcaster,
-                private _patientsQueueService: PatientQueueService) {
+                private _patientsQueueService: PatientQueueService,
+                public _validationService: ValidationService,
+                private _patientService: PatientService) {
         this._localeService.use(this.locale);
     }
 
@@ -70,25 +127,33 @@ export class AddPatientToQueueComponent implements OnInit {
     @ViewChild('femaleGender')
     femaleGender: ElementRef;
 
-    _patientInfo: PatientInfo = {} as PatientInfo;
-
-    triageType:number = TRIAGETYPE.CHILD;
-
     //<------------------->
     //End of PatientInfo Variables
     //<------------------->
 
     ngOnInit() {
-        this._modalService.show(AddSymptomsComponent, Object.assign({}, Globals.optionModalLg, {class: 'gray modal-lg'}));
+        // this.openAddSymptoms();
 
         this._broadCastService.on<any[]>('showSymptoms')
             .subscribe(response => {
                 this.symptoms = response;
             });
+
+        this._broadCastService.on('patientKey')
+            .subscribe((response:string)=>{
+                if(response != ''){
+                    this._patientService.getPatient(response)
+                        .then((response:Patient)=>{
+                            this.patient = response;
+                            this.patient.birthday = new Date(response.birthday);
+                        })
+                }
+            })
     }
 
     openAddSymptoms() {
-        this._modalService.show(AddSymptomsComponent, Object.assign({}, Globals.optionModalLg, {class: 'gray modal-lg'}));
+        let bsModalRef = this._modalService.show(AddSymptomsComponent, Object.assign({}, Globals.optionModalLg, {class: 'gray modal-lg'}));
+        bsModalRef.content.triageType = this.triageType;
     }
 
     deleteSymptom(index: number) {
@@ -96,31 +161,47 @@ export class AddPatientToQueueComponent implements OnInit {
     }
 
     addPatientToQueue() {
-        // Validations
-        if (ValidationService.errorObject(this.patient)) {
 
-        } else if (ValidationService.errorObject(this.signosVitales)) {
+        // AddPatientToQueue
+        let patientQueue: PatientSymptoms = {} as PatientSymptoms;
+        this.patient.birthday = this.patient.birthday.toString();
+        patientQueue.basicInformation = this.patient;
+        patientQueue.requireds = this.requireds;
+        patientQueue.signosVitales = this.signosVitales;
+        patientQueue.symptoms = this.symptoms;
+        patientQueue.observaciones = this.observaciones;
+        patientQueue.triageType = this.triageType;
+        patientQueue.questions = this.getQuestions(this.triageType);
+        patientQueue.nivelPaciente = this.getLevelToTime(patientQueue.symptoms);
+        patientQueue.tiempoCola = this.getTimeToQueue(patientQueue.nivelPaciente);
+        patientQueue.fechaLimite = (new Date(patientQueue.tiempoCola)).toString();
+        this._patientsQueueService.addPatientToQueue(patientQueue);
 
-        } else if (ValidationService.errorObject(this.symptoms)) {
+        this._patientService.existPatient(patientQueue.basicInformation.claveSeguro.toString())
+            .then(()=>{})
+            .catch(()=>{
+               this._patientService.setPatient(patientQueue.basicInformation);
+            });
 
-        } else if (ValidationService.errorObject(this.requireds)) {
+        // CloseModal
+        this.closeModal();
+    }
 
-        } else {
-            // AddPatientToQueue
-            let patientQueue: PatientSymptoms;
-            patientQueue.basicInformation = this.patient;
-            patientQueue.requireds = this.requireds;
-            patientQueue.signosVitales = this.signosVitales;
-            patientQueue.symptoms = this.symptoms;
-            patientQueue.observaciones = this.observaciones;
-            patientQueue.triageType = this.triageType;
-            patientQueue.questions = this.getQuestions(this.triageType);
-            debugger
-            this._patientsQueueService.addPatientToQueue(patientQueue);
+    getTimeToQueue(levelSymptom:number){
+        let date:any = new Date();
+        if(levelSymptom == LEVELSYMPTOM.RED) return date.setMinutes(date.getMinutes());
+        if(levelSymptom == LEVELSYMPTOM.ORANGE) return date.setMinutes(date.getMinutes()+15);
+        if(levelSymptom == LEVELSYMPTOM.YELLOW) return date.setMinutes(date.getMinutes()+30);
+        if(levelSymptom == LEVELSYMPTOM.GREEN) return date.setMinutes(date.getMinutes()+60);
+        if(levelSymptom == LEVELSYMPTOM.BLUE) return date.setMinutes(date.getMinutes()+120);
+    }
 
-            // CloseModal
-            this.closeModal();
-        }
+    getLevelToTime(symptoms: Symptom[]) {
+        if (_.filter(symptoms, ['level', LEVELSYMPTOM.RED]).length > 0) return LEVELSYMPTOM.RED;
+        if (_.filter(symptoms, ['level', LEVELSYMPTOM.ORANGE]).length > 0) return LEVELSYMPTOM.ORANGE;
+        if (_.filter(symptoms, ['level', LEVELSYMPTOM.YELLOW]).length > 0) return LEVELSYMPTOM.YELLOW;
+        if (_.filter(symptoms, ['level', LEVELSYMPTOM.GREEN]).length > 0) return LEVELSYMPTOM.GREEN;
+        if (_.filter(symptoms, ['level', LEVELSYMPTOM.BLUE]).length > 0) return LEVELSYMPTOM.BLUE;
     }
 
     getQuestions(triageType: number) {
@@ -133,16 +214,22 @@ export class AddPatientToQueueComponent implements OnInit {
 
             case TRIAGETYPE.WOMAN:
                 return this.questionsWoman;
+
+            case TRIAGETYPE.PREGNANT:
+                return this.questionsWoman;
         }
     }
 
-    nextTab(){
-        if(this.tab == 'chooseTriage'){
-            this.tab = 'basicInformation'
-        }else if(this.tab == 'basicInformation'){
-            this.tab = 'questions'
-        } else if(this.tab == 'questions'){
-            this.tab = 'symptoms'
+    nextTab() {
+        if (this.tab == 'chooseTriage') {
+            this.tab = 'basicInformation';
+            this.focusInputs()
+        } else if (this.tab == 'basicInformation') {
+            // if (this.isPatientInfoReady()) {
+            this.tab = 'questions';
+            // }
+        } else if (this.tab == 'questions') {
+            this.tab = 'symptoms';
         }
     }
 
@@ -150,58 +237,26 @@ export class AddPatientToQueueComponent implements OnInit {
         this._modal.hide();
     }
 
-
-    //<------------------->
-    //Start of PatientInfo
-    //<------------------->
-    advanceToSymptoms() {
-        console.log(this._patientInfo);
-        if (this.isPatientInfoReady()) console.log('Listo');
+    focusInputs(){
+        setTimeout(()=>{
+            this.patientLastNames.nativeElement.focus();
+            this.patientAlergies.nativeElement.focus();
+            this.patientBloodType.nativeElement.focus();
+            this.patientSocialNumber.nativeElement.focus();
+            this.patientAge.nativeElement.focus();
+            this.patientNames.nativeElement.focus();
+        }, 100)
     }
 
     //PatientInfo Validations
 
     isPatientInfoReady() {
-        if (this.isNamesInputEmpty()) {
-            return false;
-        }
-        else {
-            if (this.isLastNameInputEmpty()) {
-                return false;
-            }
-            else {
-                if (this.isAgeInputEmpty()) {
-                    return false;
-                }
-                else {
-                    if (this.isGenderEmpty()) {
-                        return false;
-                    }
-                    else {
-                        if (this.isBloodTypeInputEmpty()) {
-                            return false;
-                        }
-                        else {
-                            if (this.isSocialNumberInputEmpty()) {
-                                return false;
-                            }
-                            else {
-                                if (this.isAlergiesInputEmpty()) {
-                                    return false;
-                                }
-                                else {
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        return !(this.isNamesInputEmpty() || this.isLastNameInputEmpty() || this.isAgeInputEmpty() || this.isGenderEmpty()
+            || this.isBloodTypeInputEmpty() || this.isSocialNumberInputEmpty() || this.isAlergiesInputEmpty());
     }
 
     isNamesInputEmpty() {
-        if (ValidationService.errorInField(this._patientInfo.names)) {
+        if (ValidationService.errorInField(this.patient.name)) {
             this.patientNames.nativeElement.focus();
             return true;
         }
@@ -209,7 +264,7 @@ export class AddPatientToQueueComponent implements OnInit {
     }
 
     isLastNameInputEmpty() {
-        if (ValidationService.errorInField(this._patientInfo.lastNames)) {
+        if (ValidationService.errorInField(this.patient.lastName)) {
             this.patientLastNames.nativeElement.focus();
             return true;
         }
@@ -217,7 +272,7 @@ export class AddPatientToQueueComponent implements OnInit {
     }
 
     isAgeInputEmpty() {
-        if (ValidationService.errorInField(this._patientInfo.age)) {
+        if (ValidationService.errorInField(this.patient.age)) {
             this.patientAge.nativeElement.focus();
             return true;
         }
@@ -225,7 +280,7 @@ export class AddPatientToQueueComponent implements OnInit {
     }
 
     isBloodTypeInputEmpty() {
-        if (ValidationService.errorInField(this._patientInfo.bloodType)) {
+        if (ValidationService.errorInField(this.patient.bloodType)) {
             this.patientBloodType.nativeElement.focus();
             return true;
         }
@@ -233,7 +288,7 @@ export class AddPatientToQueueComponent implements OnInit {
     }
 
     isSocialNumberInputEmpty() {
-        if (ValidationService.errorInField(this._patientInfo.socialNumber)) {
+        if (ValidationService.errorInField(this.patient.claveSeguro)) {
             this.patientSocialNumber.nativeElement.focus();
             return true;
         }
@@ -241,7 +296,7 @@ export class AddPatientToQueueComponent implements OnInit {
     }
 
     isAlergiesInputEmpty() {
-        if (ValidationService.errorInField(this._patientInfo.alergies)) {
+        if (ValidationService.errorInField(this.patient.alergias)) {
             this.patientAlergies.nativeElement.focus();
             return true;
         }
@@ -249,45 +304,36 @@ export class AddPatientToQueueComponent implements OnInit {
     }
 
     isGenderEmpty() {
-        if (ValidationService.errorInField(this._patientInfo.gender)) {
-            this.maleGender.nativeElement.setAttribute('style', 'color: red')
-            this.femaleGender.nativeElement.setAttribute('style', 'color: red')
+        if (ValidationService.errorInField(this.patient.genero)) {
+            this.maleGender.nativeElement.setAttribute('style', 'color: red');
+            this.femaleGender.nativeElement.setAttribute('style', 'color: red');
             return true;
         }
         return false;
-    }
-
-    unfocusGenders(){
-        this.maleGender.nativeElement.removeAttribute('style');
-        this.femaleGender.nativeElement.removeAttribute('style');
-    }
-
-    restrictNumeric(e) {
-        let input;
-        if (e.metaKey || e.ctrlKey) {
-            return true;
-        }
-        if (e.which === 32) {
-            return false;
-        }
-        if (e.which === 0) {
-            return true;
-        }
-        if (e.which === 45) {
-            return false;
-        }
-        if (e.which === 46) {
-            return false
-        }
-        if (e.which < 33) {
-            return true;
-        }
-        input = String.fromCharCode(e.which);
-        return !!/[\d\s]/.test(input);
     }
 
     //<------------------->
     //End of PatientInfo
     //<------------------->
 
+    getBackgroundColorBySymptom(symptomLevel: number) {
+        switch (symptomLevel) {
+            case LEVELSYMPTOM.RED:
+                return 'symptom-lvl1';
+            case LEVELSYMPTOM.ORANGE:
+                return 'symptom-lvl2';
+            case LEVELSYMPTOM.YELLOW:
+                return 'symptom-lvl3';
+            case LEVELSYMPTOM.GREEN:
+                return 'symptom-lvl4';
+            case LEVELSYMPTOM.BLUE:
+                return 'symptom-lvl5';
+        }
+    }
+
+    getAgeByBirthday(birthday:string){
+        let date = new Date(birthday);
+        let today = new Date();
+        this.patient.age = today.getFullYear() - date.getFullYear();
+    }
 }

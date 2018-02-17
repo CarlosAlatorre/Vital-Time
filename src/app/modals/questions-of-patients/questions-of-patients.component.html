@@ -1,189 +1,16 @@
 <section class="addPatient-modal">
-
-    <!--Navigation-->
     <div class="row">
-        <div class="col-12">
-            <ul class="tab-nav tn-justified">
-                <li class="text-center">
-                    <a (click)="closeModal()" class="text-danger p-b-0">
-                        <i class="zmdi zmdi-close cursor-pointer zmdi-hc-2x"></i>
-                    </a>
-                </li>
-                <li class="{{ tab == 'chooseTriage' ? 'active':'' }}">
-                    <a (click)="tab = 'chooseTriage'; womanPregnant = false">Triage</a>
-                </li>
-                <li class="{{ tab == 'basicInformation' ? 'active':'' }}">
-                    <a (click)="tab = 'basicInformation'; focusInputs()">Información Básica</a>
-                </li>
-                <li class="{{ tab == 'questions' ? 'active':'' }}">
-                    <a (click)="tab = 'questions'">Cuestionario</a>
-                </li>
-                <li class="{{ tab == 'symptoms' ? 'active':'' }}">
-                    <a (click)="tab = 'symptoms'">Sintomas</a>
-                </li>
-                <li class="button-next modal-content" *ngIf="tab != 'symptoms'">
-                    <a class="text-white" (click)="nextTab()">Siguiente</a>
-                </li>
-                <li class="button-next modal-content" *ngIf="tab == 'symptoms'">
-                    <a class="text-white" (click)="addPatientToQueue()">TERMINAR</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!--Choose Triage Type-->
-    <div class="row" *ngIf="tab == 'chooseTriage'">
-        <div class="col-12">
-            <h2 style="margin-top: 10%; color: #545454;" class="text-center m-b-20">Seleccione el tipo de triage</h2>
-
-            <div class="row m-t-40" *ngIf="!womanPregnant">
-                <div class="col-4" align="right" >
-                    <img src="../../../assets/img/women.png" alt="Foto Paciente" class="triages d-block" (click)="womanPregnant = true">
-                    <label class="d-block" style="margin-right: 65px; font-size: 16px">Mujer</label>
-                </div>
-                <div class="col-4" align="center">
-                    <img src="../../../assets/img/child.png" alt="Foto Paciente" class="triages"
-                         (click)="triageType = triageEnum.KID; tab = 'basicInformation'; focusInputs(); patient.genero = ''">
-                    <label class="d-block m-r-15" style=" font-size: 16px">Niño</label>
-                </div>
-                <div class="col-4" align="left">
-                    <img src="../../../assets/img/adult.png" alt="Foto Paciente" class="triages"
-                         (click)="triageType = triageEnum.ADULTMALE; tab = 'basicInformation'; focusInputs()">
-                    <label class="d-block" style="margin-left: 50px; font-size: 16px">Adulto</label>
-                </div>
-            </div>
-            <div class="row m-t-40" *ngIf="womanPregnant">
-                <div class="offset-2 col-4" align="center">
-                    <img src="../../../assets/img/women.png" alt="Foto Paciente" class="triages"
-                         (click)="triageType = triageEnum.WOMAN; tab = 'basicInformation'; focusInputs(); patient.genero = 'Femenino'">
-                    <label class="d-block m-r-15" style=" font-size: 16px">Mujer</label>
-                </div>
-                <div class="col-4" align="center">
-                    <img src="../../../assets/img/pregnant.png" alt="Foto Paciente" class="triages"
-                         (click)="triageType = triageEnum.PREGNANT; tab = 'basicInformation'; focusInputs(); patient.genero = 'Femenino'">
-                    <label class="d-block m-r-15" style=" font-size: 16px">Embarazada</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Basic Information-->
-    <div class="row m-t-50" *ngIf="tab == 'basicInformation'">
-
-        <!--Triage Type-->
-        <div class="col-3">
-            <!---Triage Photo--->
-            <img src="../../../assets/img/child.png" alt="Foto Paciente" class="patient-photo ml-5"
-                 *ngIf="triageType==triageEnum.KID">
-            <img src="../../../assets/img/women.png" alt="Foto Paciente" class="patient-photo ml-5"
-                 *ngIf="triageType==triageEnum.WOMAN">
-            <img src="../../../assets/img/pregnant.png" alt="Foto Paciente" class="patient-photo ml-5"
-                 *ngIf="triageType==triageEnum.PREGNANT">
-            <img src="../../../assets/img/adult.png" alt="Foto Paciente" class="patient-photo ml-5"
-                 *ngIf="triageType==triageEnum.ADULTMALE">
+        <div class="col-2">
+            <i class="zmdi zmdi-close zmdi-hc-2x text-danger cursor-pointer m-l-20 m-t-15" (click)="closeModal()"></i>
         </div>
 
-        <!--Information-->
-        <div class="col-9 p-r-40 m-t-10">
-
-            <!--Name and LastName-->
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat
-                               [(ngModel)]="patient.name" #patientNames>
-                        <label>Nombres</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat
-                               [(ngModel)]="patient.lastName" #patientLastNames>
-                        <label>Apellidos</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!--Age and ...-->
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group form-group--float">
-                        <input type="number" class="form-control form-control-line" formControlFloat
-                               [(ngModel)]="patient.age" #patientAge
-                               (keypress)="_validationService.restrictNumeric($event)">
-                        <label>Edad</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-6" *ngIf="triageType == triageEnum.KID || triageType == triageEnum.WOMAN || triageType == triageEnum.PREGNANT">
-                    <div class="m-b-15 formText-color">Genero</div>
-
-                    <label class="form-check d-inline-block m-l-10">
-                        <input name="gender" type="radio" class="form-check-input" value="Masculino"
-                               [(ngModel)]="patient.genero">
-                        <span #maleGender>Masculino</span>
-                    </label>
-
-                    <label class="form-check d-inline-block m-l-10">
-                        <input name="gender" type="radio" class="form-check-input" value="Femenino"
-                               [(ngModel)]="patient.genero">
-                        <span #femaleGender>Femenino {{ triageType == triageEnum.WOMAN ? '/Adulto' : triageType == triageEnum.PREGNANT ? '/Embarazo' : '' }}</span>
-                    </label>
-
-                </div>
-            </div>
-
-            <!--Birthday and Clave-->
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <div class="form-group form-group--float m-t-13">
-                            <label style="position: relative;">Fecha de nacimiento</label>
-                            <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
-                                   [bsConfig]="bsConfig" [(ngModel)]="patient.birthday" (ngModelChange)="getAgeByBirthday(patient.birthday)"/>
-                            <i class="form-group__bar"></i>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-6">
-                    <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat
-                               [(ngModel)]="patient.claveSeguro" #patientSocialNumber
-                               (keypress)="_validationService.restrictNumeric($event)">
-                        <label>Clave de seguro</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!--Blood Type and Alergias-->
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat
-                               [(ngModel)]="patient.bloodType" #patientBloodType>
-                        <label>Tipo de sangre</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group form-group--float">
-                        <input type="text" class="form-control form-control-line" formControlFloat
-                               [(ngModel)]="patient.alergias" #patientAlergies>
-                        <label>Alergias</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-            </div>
-
+        <div class="col-8">
+            <h3 class="text-info text-center m-t-15">Preguntas del paciente</h3>
         </div>
     </div>
 
     <!--Questions-->
-    <div class="row m-t-20" *ngIf="tab == 'questions'">
+    <div class="row">
 
         <div class="col-12">
             <!--Woman and pregnant-->
@@ -192,8 +19,8 @@
                     <div class="row">
                         <div class="offset-2 col-4">
                             <div class="form-group form-group--float">
-                                <input type="text" class="form-control form-control-line" formControlFloat autofocus
-                                       [(ngModel)]="questionsWoman.tiempoPresentandoSintomas">
+                                <input type="text" class="form-control form-control-line" formControlFloat
+                                       [(ngModel)]="questionsWoman.tiempoPresentandoSintomas" #preguntas>
                                 <label class="form-bold">Tiempo presentando sintomas</label>
                                 <i class="form-group__bar"></i>
                             </div>
@@ -205,7 +32,7 @@
                             <div class="form-bold m-t-10 m-b-10">Consumo de medicamentos</div>
                             <label class=" form-check d-inline-block">
                                 <input name="medicamentos" type="radio" class="form-check-input" [value]="true"
-                                       [(ngModel)]="questionsWoman.consumoMedicamentos">
+                                       [(ngModel)]="questionsWoman.consumoMedicamentos" >
                                 <span class="">Si</span>
                             </label>
 
@@ -267,7 +94,7 @@
                             <!--Woman-->
                             <div class="form-group form-group--float m-t-35">
                                 <input type="text" class="form-control form-control-line" formControlFloat
-                                       [(ngModel)]="questionsWoman.ultimaMenstruacion">
+                                       [(ngModel)]="questionsWoman.ultimaMenstruacion" >
                                 <label class="form-bold">Ultima menstruación</label>
                                 <i class="form-group__bar"></i>
                             </div>
@@ -275,7 +102,7 @@
                             <!--Pregnant-->
                             <div class="form-group form-group--float" *ngIf="triageType == triageEnum.PREGNANT">
                                 <input type="number" class="form-control form-control-line" formControlFloat
-                                       [(ngModel)]="questionsWoman.semanasGestacion">
+                                       [(ngModel)]="questionsWoman.semanasGestacion" #preguntas1>
                                 <label class="form-bold">Semanas de gestación</label>
                                 <i class="form-group__bar"></i>
                             </div>
@@ -283,7 +110,7 @@
                         <div class="col-4">
                             <div class="form-group form-group--float m-t-35">
                                 <input type="number" class="form-control form-control-line" formControlFloat
-                                       [(ngModel)]="questionsWoman.embarazos">
+                                       [(ngModel)]="questionsWoman.embarazos" #preguntas2>
                                 <label class="form-bold">Numero de embarazos</label>
                                 <i class="form-group__bar"></i>
                             </div>
@@ -294,7 +121,7 @@
                         <div class="offset-2 col-4">
                             <div class="form-group form-group--float m-t-5">
                                 <input type="number" class="form-control form-control-line" formControlFloat
-                                       [(ngModel)]="questionsWoman.partos">
+                                       [(ngModel)]="questionsWoman.partos" #preguntas3>
                                 <label class="form-bold">Numero de partos</label>
                                 <i class="form-group__bar"></i>
                             </div>
@@ -302,7 +129,7 @@
                         <div class="col-4">
                             <div class="form-group form-group--float m-t-5">
                                 <input type="number" class="form-control form-control-line" formControlFloat
-                                       [(ngModel)]="questionsWoman.abortos">
+                                       [(ngModel)]="questionsWoman.abortos" #preguntas4>
                                 <label class="form-bold">Numero de abortos</label>
                                 <i class="form-group__bar"></i>
                             </div>
@@ -329,7 +156,8 @@
                             <div class="form-group form-group--select m-t-10">
                                 <div class="">
                                     <label class="form-bold">Ultimo parto</label>
-                                    <select class="form-control form-control-line" [(ngModel)]="questionsWoman.ultimoParto">
+                                    <select class="form-control form-control-line"
+                                            [(ngModel)]="questionsWoman.ultimoParto">
                                         <option>Natural</option>
                                         <option>Cesaria</option>
                                     </select>
@@ -429,7 +257,7 @@
                         <div class="offset-2 col-4">
                             <div class="form-group form-group--float">
                                 <input type="text" class="form-control form-control-line" formControlFloat
-                                       [(ngModel)]="questionsKid.tiempoPresentandoSintomas">
+                                       [(ngModel)]="questionsKid.tiempoPresentandoSintomas" >
                                 <label class="form-bold">Tiempo presentando sintomas</label>
                                 <i class="form-group__bar"></i>
                             </div>
@@ -502,7 +330,7 @@
                         <div class="offset-2 col-4">
                             <div class="form-group form-group--float">
                                 <input type="text" class="form-control form-control-line" formControlFloat
-                                       [(ngModel)]="questionsKid.tipoDieta">
+                                       [(ngModel)]="questionsKid.tipoDieta" >
                                 <label class="form-bold">Tipo de dieta</label>
                                 <i class="form-group__bar"></i>
                             </div>
@@ -522,7 +350,8 @@
                             <div class="form-group form-group--select">
                                 <div>
                                     <label class="form-bold">Seleccione el tipo Parto</label>
-                                    <select class="form-control form-bold form-control-file" [(ngModel)]="questionsKid.tipoParto">
+                                    <select class="form-control form-bold form-control-file"
+                                            [(ngModel)]="questionsKid.tipoParto">
                                         <option>Natural</option>
                                         <option>Cesarea</option>
                                     </select>
@@ -533,7 +362,8 @@
                             <div class="form-group form-group--select">
                                 <div>
                                     <label class="form-bold">Estado del niño</label>
-                                    <select class="form-control form-bold form-control-file" [(ngModel)]="questionsKid.estado">
+                                    <select class="form-control form-bold form-control-file"
+                                            [(ngModel)]="questionsKid.estado">
                                         <option>Activo</option>
                                         <option>Inactivo</option>
                                     </select>
@@ -574,180 +404,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-
-    <!--Symptoms-->
-    <div class="row p-t-40 p-l-50" *ngIf="tab == 'symptoms'">
-
-        <!--Vital signs-->
-        <div class="col-3">
-
-            <div class="form-group form-group--float m-t-0">
-                <input type="number" class="form-control form-control-line" formControlFloat
-                       [(ngModel)]="signosVitales.pulso">
-                <label class="form-bold">Pulso</label>
-                <i class="form-group__bar"></i>
-            </div>
-
-            <div class="form-group form-group--float m-t-50">
-                <input type="number" class="form-control form-control-line" formControlFloat
-                       [(ngModel)]="signosVitales.presionArterialSintolica">
-                <label class="form-bold">Presion arterial sintolica</label>
-                <i class="form-group__bar"></i>
-            </div>
-
-            <div class="form-group form-group--float m-t-50">
-                <input type="number" class="form-control form-control-line" formControlFloat
-                       [(ngModel)]="signosVitales.presionArterialDiastolica">
-                <label class="form-bold">Presion arterial diastólica</label>
-                <i class="form-group__bar"></i>
-            </div>
-
-            <div class="form-group form-group--float m-t-50">
-                <input type="number" class="form-control form-control-line" formControlFloat
-                       [(ngModel)]="signosVitales.temperatura">
-                <label class="form-bold">Temperatura</label>
-                <i class="form-group__bar"></i>
-            </div>
-
-            <div class="form-group form-group--float m-t-50">
-                <input type="number" class="form-control form-control-line" formControlFloat
-                       [(ngModel)]="signosVitales.spo2">
-                <label class="form-bold">spO2</label>
-                <i class="form-group__bar"></i>
-            </div>
-
-        </div>
-
-        <!--Symptoms-->
-        <div class="col-5">
-
-            <div class="row">
-                <div class="col-12 text-center">
-                    <span class="cursor-pointer" (click)="openAddSymptoms()">Selecciona los sintomas</span>
-                </div>
-            </div>
-
-            <div class="row m-t-15" style="    height: 300px;overflow-y: auto;overflow-x: hidden;">
-                <div class="offset-1 col-10 p-r-0">
-
-                    <div class="row" *ngIf="symptoms.length == 0">
-                        <div class="col-12 text-center cursor-pointer" (click)="openAddSymptoms()">
-                            <div class="zmdi zmdi-quote m-t-20 not-found-quote">
-                            </div>
-                            <div class="not-found">No hay</div>
-                            <div class="m-b-30 not-found">Sintomas</div>
-                        </div>
-                    </div>
-
-                    <table class="table table-hover table-sintomas" *ngIf="symptoms.length > 0">
-                        <tbody>
-                        <tr *ngFor="let symptom of symptoms; let index = index">
-                            <td class="r-s-columnas">
-                                <div class="r-s-s-r {{ getBackgroundColorBySymptom(symptom.level) }}" >
-                                    <div class="row">
-                                        <div class="col-9 r-s-a-s">
-                                            {{ symptom.name  |  slice:0:25}}
-                                        </div>
-                                        <div class="col-2 r-s-a-s-r">
-                                            <img class="r-s-trash-icon cursor-pointer"
-                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABQUlEQVRoQ+1Z7W3CUAy8m6AjwAjdpIxAN+gobEBHoJt0BNgAJnD1pARVUZFt6vAUdPlr5/k+7BcjiIU/XDh+iEBvB+XAUzlgZlsAe4fUJ8n3KuJlLRQEP+IuIxEmYGZWpVrkHJIhbKGkVlAEIrL/ypEDScG6pYdnoBtCp3CawNzDHO39kZcIVLeWHPAU1Qx4t0pwhSgf4mnvTp3y4ldAIuBYfGsGPIW9uBzwbp8xLgcGJaJCeMKWrRJej3txzYBnlWZg8oHSDAwtoSG+dXtoFwreKmohtdCkVbr9JvZWBS/efZUIzpyb1s0BF1kw4REEzgBegniyaSeS68xL91yjBwBvmSKJ3C+Sm0R+/n9iM2sKfc/gwgXAK8njrATa4QOJXSsIYJUp+EfuaRDkIwu+nZVuoX+CLX9dBMolTR64eAd+APwQKUB3Y01CAAAAAElFTkSuQmCC"
-                                                 (click)="deleteSymptom(index)">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-
-        <!--Requireds-->
-        <div class="col-4">
-
-            <div class="row r-s-rows m-t-0 m-b-20">
-                <div class="col-12">
-                    <span>Requiere</span>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <label class="control control--checkbox">
-                        Rayos x
-                        <input type="checkbox" [(ngModel)]="requireds.rayosx"/>
-                        <div class="control__indicator"></div>
-                    </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <label class="control control--checkbox">
-                        Sala de choque
-                        <input type="checkbox" [(ngModel)]="requireds.salaChoque"/>
-                        <span class="control__indicator"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <label class="control control--checkbox">
-                        Analisis clinicos
-                        <input type="checkbox" [(ngModel)]="requireds.analisisClinicos"/>
-                        <span class="control__indicator"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <label class="control control--checkbox">
-                        Tomografia
-                        <input type="checkbox" [(ngModel)]="requireds.tomografia"/>
-                        <span class="control__indicator"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <label class="control control--checkbox">
-                        Ultrasonido
-                        <input type="checkbox" [(ngModel)]="requireds.ultrasonido"/>
-                        <span class="control__indicator"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <label class="control control--checkbox">
-                        Cirugia
-                        <input type="checkbox" [(ngModel)]="requireds.cirugia"/>
-                        <span class="control__indicator"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="row m-t-20">
-                <div class="col-12 p-r-40">
-                    <div class="form-group">
-                        <textarea class="form-control form-control-line form-bold-placeholder" rows="8"
-                                  placeholder="Observaciones"
-                                  [(ngModel)]="observaciones"
-                        ></textarea>
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
     </div>

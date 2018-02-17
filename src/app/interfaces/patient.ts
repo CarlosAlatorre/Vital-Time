@@ -2,9 +2,8 @@ export interface Patient {
     name:string
     lastName:string
     age:number
-    //TODO: Buscar como se dice genero
     genero:string
-    birthday:string
+    birthday:any
     claveSeguro:number
     bloodType:string
     alergias:string

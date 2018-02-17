@@ -9,7 +9,7 @@ export interface QuestionsKid {
     tipoDieta:string
     ultimaComida:string
     tipoParto:string
-    escuela:string
+    escuela:boolean
     fueHoy:boolean
     estado:string
 }
