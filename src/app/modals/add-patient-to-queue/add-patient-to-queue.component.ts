@@ -46,10 +46,10 @@ export class AddPatientToQueueComponent implements OnInit {
     patient: Patient = {
         name: '',
         lastName: '',
-        age: 0,
+        age: null,
         genero: '',
         birthday: '',
-        claveSeguro: 0,
+        claveSeguro: null,
         bloodType: '',
         alergias: ''
     };

@@ -45,7 +45,25 @@ export class PatientsQueueComponent implements OnInit {
                 private _symptomService: SymptomsService,
                 private _patientsQueueService: PatientQueueService,
                 private _broadCast:Broadcaster){
+        let a = [2, 3, 2, 1, 3, 2];
+
+        var t0 = performance.now();
+        console.log(this.firstDuplicate(a));
+        var t1 = performance.now();
+        console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
+
     }
+
+    firstDuplicate(a: number[]): number {
+        debugger
+        for (let i of a) {
+            let posi = Math.abs(i) - 1
+            if (a[posi] < 0) return posi + 1
+            a[posi] = a[posi] * -1
+        }
+        return -1
+    }
+
 
     ngOnInit() {
         this.symptoms = this._symptomService.getSymptoms();
