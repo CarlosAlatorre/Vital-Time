@@ -1,0 +1,13 @@
+<div class="growl animated {{ showGrowl ? 'fadeInDown' : 'growlHide' }}">
+    <div class="close-button" (click)="closeGrowl()">
+    </div>
+    <div class="growl-text">
+
+        <div class="growl-title">
+            {{ title }}
+        </div>
+        <div class="growl-message">
+            {{ message }}
+        </div>
+    </div>
+</div>

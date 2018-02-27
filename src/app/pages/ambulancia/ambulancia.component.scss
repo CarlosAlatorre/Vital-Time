@@ -1,0 +1,87 @@
+.triages {
+    width: 70px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.not-found {
+    font-size: 20px;
+    color: #bdc3c7;
+}
+
+.not-found-quote {
+    font-size: 40px;
+    color: #bdc3c7;
+}
+
+.r-s-columnas {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    padding-bottom: 2px !important;
+    padding-top: 2px !important;
+}
+
+.r-s-a-s {
+    display: inline;
+    padding-left: 7px;
+    padding-right: -6px;
+    padding-top: 2px;
+    font-size: 12px !important;
+}
+
+.r-s-a-s-r {
+    display: inline;
+    padding-left: 10px;
+}
+
+.r-s-trash-icon {
+    color: white;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 2px;
+}
+
+.r-s-s-r {
+    border-radius: 25px 25px 25px 25px;
+    /*background-color: #e74c3c;*/
+    color: white;
+    font-weight: bold;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.r-s-s-r {
+    border-radius: 25px 25px 25px 25px;
+    /*background-color: #e74c3c;*/
+    color: white;
+    font-weight: bold;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.symptom-lvl1 {
+    background-color: #e74c3c;
+}
+
+.symptom-lvl2 {
+    background-color: #e67e22;
+}
+
+.symptom-lvl3 {
+    background-color: #f39c12;
+}
+
+.symptom-lvl4 {
+    background-color: #2ecc71;
+}
+
+.symptom-lvl5 {
+    background-color: #3498db;
+}
+
+.patientLevel {
+    color: white;
+    padding: 10px;
+}

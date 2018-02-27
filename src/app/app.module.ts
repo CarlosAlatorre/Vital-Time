@@ -11,6 +11,14 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
 import {ModalModule} from 'ngx-bootstrap';
 import { AddSymptomsComponent } from './modals/add-symptoms/add-symptoms.component';
+import { SearchSelectComponent } from './pages/search-select/search-select.component';
+import {CountdownTimerModule} from 'ngx-countdown-timer';
+import { LimitToPipe } from './pipes/limit-to.pipe';
+import { ToastrModule } from 'ngx-toastr';
+import { GrowlComponent } from './components/growl/growl.component';
+import { QuestionsOfPatientsComponent } from './modals/questions-of-patients/questions-of-patients.component';
+import { AmbulanciaComponent } from './pages/ambulancia/ambulancia.component';
+
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -18,11 +26,13 @@ defineLocale('es', esLocale);
         BrowserModule,
         HttpModule,
         BrowserAnimationsModule,
-        routing
+        routing,
+        CountdownTimerModule.forRoot(),
+        ToastrModule.forRoot(),
 
     ],
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     providers: [
         SharedService,

@@ -1,0 +1,107 @@
+<section class="content bg-white" style="height: 100vh;">
+    <div class="row">
+        <div class="col-12">
+            <h4 style="color: #545454;" class="text-center m-b-20">Seleccione el tipo de triage</h4>
+
+            <div class="row m-t-40" *ngIf="!womanPregnant">
+                <div class="col-4" align="right" >
+                    <img src="../../../assets/img/women.png" alt="Foto Paciente" class="triages d-block" (click)="womanPregnant = true">
+                    <label class="d-block" style="margin-right: 35px; font-size: 12px">Mujer</label>
+                </div>
+                <div class="col-4" align="center">
+                    <img src="../../../assets/img/child.png" alt="Foto Paciente" class="triages"
+                         (click)="triageType = triageEnum.KID; ">
+                    <label class="d-block m-r-15" style=" font-size: 12px">Niño</label>
+                </div>
+                <div class="col-4" align="left">
+                    <img src="../../../assets/img/adult.png" alt="Foto Paciente" class="triages"
+                         (click)="triageType = triageEnum.ADULTMALE; ">
+                    <label class="d-block" style="margin-left: 20px; font-size: 12px">Adulto</label>
+                </div>
+            </div>
+            <div class="row m-t-40" *ngIf="womanPregnant">
+                <div class="offset-2 col-4" align="center">
+                    <img src="../../../assets/img/women.png" alt="Foto Paciente" class="triages"
+                         (click)="triageType = triageEnum.WOMAN;  ">
+                    <label class="d-block m-r-15" style=" font-size: 12px">Mujer</label>
+                </div>
+                <div class="col-4" align="center">
+                    <img src="../../../assets/img/pregnant.png" alt="Foto Paciente" class="triages"
+                         (click)="triageType = triageEnum.PREGNANT; ">
+                    <label class="d-block m-r-15" style=" font-size: 12px">Embarazada</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-t-20">
+        <div class="col-8">
+            <div class="form-group">
+                <input type="text" class="form-control form-control-line" placeholder="Clave de seguro">
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-success">Nuevo</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-1 col-11">
+            <searchSelect [triageType]="triageType"></searchSelect>
+        </div>
+    </div>
+
+
+    <!--Symptoms-->
+    <div class="row" style="    height: 150px;overflow-y: auto;overflow-x: hidden;">
+        <div class="col-11 p-r-0">
+
+            <div class="row" *ngIf="symptoms.length == 0">
+                <div class="col-12 text-center cursor-pointer">
+                    <div class="zmdi zmdi-quote m-t-20 not-found-quote">
+                    </div>
+                    <div class="not-found">No hay</div>
+                    <div class="m-b-30 not-found">Sintomas</div>
+                </div>
+            </div>
+
+            <table class="table table-hover table-sintomas" *ngIf="symptoms.length > 0">
+                <tbody>
+                <tr *ngFor="let symptom of symptoms; let index = index">
+                    <td class="r-s-columnas">
+                        <div class="r-s-s-r {{ getBackgroundColorBySymptom(symptom.level) }}" >
+                            <div class="row">
+                                <div class="col-9 r-s-a-s">
+                                    {{ symptom.name  |  slice:0:25}}
+                                    {{showLevel(symptoms)}}
+                                </div>
+                                <div class="col-2 r-s-a-s-r">
+                                    <img class="r-s-trash-icon cursor-pointer"
+                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABQUlEQVRoQ+1Z7W3CUAy8m6AjwAjdpIxAN+gobEBHoJt0BNgAJnD1pARVUZFt6vAUdPlr5/k+7BcjiIU/XDh+iEBvB+XAUzlgZlsAe4fUJ8n3KuJlLRQEP+IuIxEmYGZWpVrkHJIhbKGkVlAEIrL/ypEDScG6pYdnoBtCp3CawNzDHO39kZcIVLeWHPAU1Qx4t0pwhSgf4mnvTp3y4ldAIuBYfGsGPIW9uBzwbp8xLgcGJaJCeMKWrRJej3txzYBnlWZg8oHSDAwtoSG+dXtoFwreKmohtdCkVbr9JvZWBS/efZUIzpyb1s0BF1kw4REEzgBegniyaSeS68xL91yjBwBvmSKJ3C+Sm0R+/n9iM2sKfc/gwgXAK8njrATa4QOJXSsIYJUp+EfuaRDkIwu+nZVuoX+CLX9dBMolTR64eAd+APwQKUB3Y01CAAAAAElFTkSuQmCC"
+                                         (click)="deleteSymptom(index)">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row m-t-20">
+        <div class="offset-1 col-10">
+            <h5>
+                Nivel de emergencia: <span class="patientLevel {{ getBackgroundColorBySymptom(patientLevel) }}">{{ getLevel(patientLevel) }}</span>
+            </h5>
+        </div>
+    </div>
+
+    <div class="row m-t-20" style="position: absolute; bottom: 20px; width: 100%; ">
+        <div class="offset-1 col-10">
+            <button class="btn btn-danger btn-block" style="height: 50px !important;" (click)="sendToHospital()">ENVIAR DATOS AL HOSPITAL</button>
+        </div>
+    </div>
+
+</section>

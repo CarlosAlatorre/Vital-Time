@@ -22,6 +22,23 @@ import {Globals} from '../statics/globals';
 // import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../shared/shared.module';
 import {AddSymptomsComponent} from '../modals/add-symptoms/add-symptoms.component';
+import {Select2Module} from 'ng2-select2';
+import {SearchSelectComponent} from '../pages/search-select/search-select.component';
+import {Broadcaster} from '../../assets/js/broadcaster';
+import {AngularFireModule} from 'angularfire2';
+import {environment} from '../../environments/environment';
+import {AngularFireDatabase, AngularFireDatabaseModule} from 'angularfire2/database';
+import {SymptomsService} from '../services/symptoms.service';
+import {AlertService} from '../services/alert.service';
+import {ValidationService} from '../services/validation.service';
+import {PatientQueueService} from '../services/patient-queue.service';
+import {CountdownTimerModule} from 'ngx-countdown-timer';
+import {LimitToPipe} from '../pipes/limit-to.pipe';
+import {GrowlComponent} from '../components/growl/growl.component';
+import {PatientService} from '../services/patient.service';
+import {QuestionsOfPatientsComponent} from '../modals/questions-of-patients/questions-of-patients.component';
+import {AmbulanciaComponent} from '../pages/ambulancia/ambulancia.component';
+
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -38,10 +55,21 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NewPatientComponent,
         PatientAssessmentComponent,
         AddPatientToQueueComponent,
-        AddSymptomsComponent
+        AddSymptomsComponent,
+        SearchSelectComponent,
+        LimitToPipe,
+        GrowlComponent,
+        QuestionsOfPatientsComponent,
+        AmbulanciaComponent
     ],
     providers: [
-        Globals
+        Globals,
+        Broadcaster,
+        SymptomsService,
+        AlertService,
+        ValidationService,
+        PatientQueueService,
+        PatientService
     ],
     imports: [
         CommonModule,
@@ -52,16 +80,20 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ProgressbarModule.forRoot(),
         ButtonsModule.forRoot(),
         PerfectScrollbarModule,
-        // NgbModule,
         TabsModule.forRoot(),
         BsDatepickerModule.forRoot(),
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        Select2Module,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
+        CountdownTimerModule,
     ],
     entryComponents: [
         NewPatientComponent,
         PatientAssessmentComponent,
         AddPatientToQueueComponent,
-        AddSymptomsComponent
+        AddSymptomsComponent,
+        QuestionsOfPatientsComponent
     ]
 })
 
