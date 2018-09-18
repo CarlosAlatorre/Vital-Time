@@ -10,6 +10,7 @@ export class GrowlComponent implements OnInit {
     @Input() title:string;
     @Input() message:string;
     @Input() showGrowl:boolean;
+    @Input() theme:string;
 
     constructor() {
     }

@@ -19,7 +19,6 @@ import {NewPatientComponent} from '../modals/new-patient/new-patient.component';
 import {PatientAssessmentComponent} from '../modals/patient-assessment/patient-assessment.component';
 import {AddPatientToQueueComponent} from '../modals/add-patient-to-queue/add-patient-to-queue.component';
 import {Globals} from '../statics/globals';
-// import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../shared/shared.module';
 import {AddSymptomsComponent} from '../modals/add-symptoms/add-symptoms.component';
 import {Select2Module} from 'ng2-select2';
@@ -27,7 +26,7 @@ import {SearchSelectComponent} from '../pages/search-select/search-select.compon
 import {Broadcaster} from '../../assets/js/broadcaster';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../../environments/environment';
-import {AngularFireDatabase, AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {SymptomsService} from '../services/symptoms.service';
 import {AlertService} from '../services/alert.service';
 import {ValidationService} from '../services/validation.service';
@@ -38,63 +37,74 @@ import {GrowlComponent} from '../components/growl/growl.component';
 import {PatientService} from '../services/patient.service';
 import {QuestionsOfPatientsComponent} from '../modals/questions-of-patients/questions-of-patients.component';
 import {AmbulanciaComponent} from '../pages/ambulancia/ambulancia.component';
+import {SymptomsComponent} from '../pages/symptoms/symptoms.component';
+import {EmergencyComponent} from '../modals/emergency/emergency.component';
+import {EmergencyService} from '../services/emergency.service';
+import {MapProvider} from '../services/map/map';
+import {FormatsProvider} from '../services/formats/formats';
 
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true
+  suppressScrollX: true
 };
 
 @NgModule({
-    declarations: [
-        LayoutComponent,
-        HeaderComponent,
-        SearchComponent,
-        NavigationComponent,
-        NavigationTriggerComponent,
-        PatientsQueueComponent,
-        NewPatientComponent,
-        PatientAssessmentComponent,
-        AddPatientToQueueComponent,
-        AddSymptomsComponent,
-        SearchSelectComponent,
-        LimitToPipe,
-        GrowlComponent,
-        QuestionsOfPatientsComponent,
-        AmbulanciaComponent
-    ],
-    providers: [
-        Globals,
-        Broadcaster,
-        SymptomsService,
-        AlertService,
-        ValidationService,
-        PatientQueueService,
-        PatientService
-    ],
-    imports: [
-        CommonModule,
-        LayoutRouting,
-        FormsModule,
-        SharedModule,
-        BsDropdownModule.forRoot(),
-        ProgressbarModule.forRoot(),
-        ButtonsModule.forRoot(),
-        PerfectScrollbarModule,
-        TabsModule.forRoot(),
-        BsDatepickerModule.forRoot(),
-        ModalModule.forRoot(),
-        Select2Module,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireDatabaseModule,
-        CountdownTimerModule,
-    ],
-    entryComponents: [
-        NewPatientComponent,
-        PatientAssessmentComponent,
-        AddPatientToQueueComponent,
-        AddSymptomsComponent,
-        QuestionsOfPatientsComponent
-    ]
+  declarations: [
+    LayoutComponent,
+    HeaderComponent,
+    SearchComponent,
+    NavigationComponent,
+    NavigationTriggerComponent,
+    PatientsQueueComponent,
+    NewPatientComponent,
+    PatientAssessmentComponent,
+    AddPatientToQueueComponent,
+    AddSymptomsComponent,
+    SearchSelectComponent,
+    LimitToPipe,
+    GrowlComponent,
+    QuestionsOfPatientsComponent,
+    AmbulanciaComponent,
+    SymptomsComponent,
+    EmergencyComponent,
+  ],
+  providers: [
+    Globals,
+    Broadcaster,
+    SymptomsService,
+    AlertService,
+    ValidationService,
+    PatientQueueService,
+    PatientService,
+    EmergencyService,
+    MapProvider,
+    FormatsProvider
+  ],
+  imports: [
+    CommonModule,
+    LayoutRouting,
+    FormsModule,
+    SharedModule,
+    BsDropdownModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    ButtonsModule.forRoot(),
+    PerfectScrollbarModule,
+    TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    ModalModule.forRoot(),
+    Select2Module,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    CountdownTimerModule,
+  ],
+  entryComponents: [
+    NewPatientComponent,
+    PatientAssessmentComponent,
+    AddPatientToQueueComponent,
+    AddSymptomsComponent,
+    QuestionsOfPatientsComponent,
+    EmergencyComponent,
+  ]
 })
 
 export class LayoutModule {

@@ -65,7 +65,6 @@ export class PatientAssessmentComponent implements OnInit {
                 private _broadCast:Broadcaster) {
     }
 
-
     ngOnInit() {
         this.getPatient();
     }

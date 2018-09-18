@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-4" align="left">
                     <img src="../../../assets/img/adult.png" alt="Foto Paciente" class="triages"
-                         (click)="triageType = triageEnum.ADULTMALE; tab = 'basicInformation'; focusInputs()">
+                         (click)="triageType = triageEnum.ADULTMALE; tab = 'basicInformation'; focusInputs(); patient.genero = 'Masculino'">
                     <label class="d-block" style="margin-left: 50px; font-size: 16px">Adulto</label>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                     <div class="form-group">
                         <div class="form-group form-group--float m-t-13">
                             <label style="position: relative;">Fecha de nacimiento</label>
-                            <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                            <input type="text" class="form-control bs-datepicker" #dp="bsDatepicker" bsDatepicker
                                    [bsConfig]="bsConfig" [(ngModel)]="patient.birthday" (ngModelChange)="getAgeByBirthday(patient.birthday)"/>
                             <i class="form-group__bar"></i>
                         </div>
@@ -586,13 +586,6 @@
 
             <div class="form-group form-group--float m-t-0">
                 <input type="number" class="form-control form-control-line" formControlFloat
-                       [(ngModel)]="signosVitales.pulso">
-                <label class="form-bold">Pulso</label>
-                <i class="form-group__bar"></i>
-            </div>
-
-            <div class="form-group form-group--float m-t-50">
-                <input type="number" class="form-control form-control-line" formControlFloat
                        [(ngModel)]="signosVitales.presionArterialSintolica">
                 <label class="form-bold">Presion arterial sintolica</label>
                 <i class="form-group__bar"></i>
@@ -607,15 +600,22 @@
 
             <div class="form-group form-group--float m-t-50">
                 <input type="number" class="form-control form-control-line" formControlFloat
-                       [(ngModel)]="signosVitales.temperatura">
-                <label class="form-bold">Temperatura</label>
+                       [(ngModel)]="signosVitales.spo2">
+                <label class="form-bold">spO2</label>
                 <i class="form-group__bar"></i>
             </div>
 
             <div class="form-group form-group--float m-t-50">
                 <input type="number" class="form-control form-control-line" formControlFloat
-                       [(ngModel)]="signosVitales.spo2">
-                <label class="form-bold">spO2</label>
+                       [(ngModel)]="signosVitales.pulso">
+                <label class="form-bold">Pulso</label>
+                <i class="form-group__bar"></i>
+            </div>
+
+            <div class="form-group form-group--float m-t-50">
+                <input type="number" class="form-control form-control-line" formControlFloat
+                       [(ngModel)]="signosVitales.temperatura">
+                <label class="form-bold">Temperatura</label>
                 <i class="form-group__bar"></i>
             </div>
 

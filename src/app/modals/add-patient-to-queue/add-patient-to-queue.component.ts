@@ -335,5 +335,16 @@ export class AddPatientToQueueComponent implements OnInit {
         let date = new Date(birthday);
         let today = new Date();
         this.patient.age = today.getFullYear() - date.getFullYear();
+
+        if ((today.getMonth() < date.getMonth()|| (today.getMonth() == date.getMonth()&& today.getDate() < date.getDate())) && (this.patient.age > 0)) {
+            this.patient.age--;
+        }
+
+        setTimeout(()=>{
+
+            this.patientAge.nativeElement.focus();
+            this.patientSocialNumber.nativeElement.focus();
+        }, 100)
+
     }
 }

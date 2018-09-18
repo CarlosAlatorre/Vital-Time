@@ -53,68 +53,206 @@ export class QuestionsOfPatientsComponent implements OnInit {
         estado: '',
     };
     triageType: number = TRIAGETYPE.KID;
-    triageEnum:any = TRIAGETYPE;
-    @ViewChild('preguntas')
-    preguntasRef: ElementRef;
-    @ViewChild('preguntas1')
-    preguntasRefuno: ElementRef;
-    @ViewChild('preguntas2')
-    preguntasRef2: ElementRef;
-    @ViewChild('preguntas3')
-    preguntasRef3: ElementRef;
-    @ViewChild('preguntas4')
-    preguntasRef4: ElementRef;
-    // @ViewChild('preguntas5')
-    // preguntasRef5: ElementRef;
-    // @ViewChild('preguntas6')
-    // preguntasRef6: ElementRef;
-    // @ViewChild('preguntas7')
-    // preguntasRef7: ElementRef;
-    // @ViewChild('preguntas8')
-    // preguntasRef8: ElementRef;
-    // @ViewChild('preguntas9')
-    // preguntasRef9: ElementRef;
-    // @ViewChild('preguntas10')
-    // preguntasRef10: ElementRef;
+    triageEnum: any = TRIAGETYPE;
 
-    constructor(private _broadCast:Broadcaster,
-                private _modalService:BsModalRef) {
+    //Woman and Pregnant Refs
+    @ViewChild('tiempoSintomasMujerEmb')
+    tiempoSintomasMujerEmb: ElementRef;
+    @ViewChild('siConsumoMedicMujerEmb')
+    siConsumoMedicMujerEmb: ElementRef;
+    @ViewChild('noConsumoMedicMujerEmb')
+    noConsumoMedicMujerEmb: ElementRef;
+    @ViewChild('cualesConsumoMujerEmb')
+    cualesConsumoMujerEmb: ElementRef;
+    @ViewChild('cuandoConsumoMujerEmb')
+    cuandoConsumoMujerEmb: ElementRef;
+    @ViewChild('siCirugiasMujerEmb')
+    siCirugiasMujerEmb: ElementRef;
+    @ViewChild('noCirugiasMujerEmb')
+    noCirugiasMujerEmb: ElementRef;
+    @ViewChild('cualesCirugiasMujerEmb')
+    cualesCirugiasMujerEmb: ElementRef;
+    @ViewChild('cuandoCirugiasMujerEmb')
+    cuandoCirugiasMujerEmb: ElementRef;
+    @ViewChild('numeroEmbarazosMujerEmb')
+    numeroEmbarazosMujerEmb: ElementRef;
+    @ViewChild('numeroPartosMujerEmb')
+    numeroPartosMujerEmb: ElementRef;
+    @ViewChild('numeroAbortosMujerEmb')
+    numeroAbortosMujerEmb: ElementRef;
+    @ViewChild('siLactanciaMujerEmb')
+    siLactanciaMujerEmb: ElementRef;
+    @ViewChild('noLactanciaMujerEmb')
+    noLactanciaMujerEmb: ElementRef;
+    @ViewChild('ultimoAbortoMujerEmb')
+    ultimoAbortoMujerEmb: ElementRef;
+
+    //Woman refs
+    @ViewChild('mentruacionMujer')
+    mentruacionMujer: ElementRef;
+
+    //Pregnant Refs
+    @ViewChild('gestacionEmb')
+    gestacionEmb: ElementRef;
+
+    //Man Refs
+    @ViewChild('tiempoSintomasHmr')
+    tiempoSintomasHmr: ElementRef;
+    @ViewChild('siCirugiasHmr')
+    siCirugiasHmr: ElementRef;
+    @ViewChild('noCirugiasHmr')
+    noCirugiasHmr: ElementRef;
+    @ViewChild('cualesCirugiasHmr')
+    cualesCirugiasHmr: ElementRef;
+    @ViewChild('cuandoCirugiasHmr')
+    cuandoCirugiasHmr: ElementRef;
+    @ViewChild('siConsumoMedicamentosHmr')
+    siConsumoMedicamentosHmr: ElementRef;
+    @ViewChild('noConsumoMedicamentosHmr')
+    noConsumoMedicamentosHmr: ElementRef;
+    @ViewChild('cualesConsumoMedicamentosHmr')
+    cualesConsumoMedicamentosHmr: ElementRef;
+    @ViewChild('cuandoConsumoMedicamentosHmr')
+    cuandoConsumoMedicamentosHmr: ElementRef;
+
+    //Child Refs
+    @ViewChild('tiempoSintomasNino')
+    tiempoSintomasNino: ElementRef;
+    @ViewChild('siConsumoMediNino')
+    siConsumoMediNino: ElementRef;
+    @ViewChild('noConsumoMediNino')
+    noConsumoMediNino: ElementRef;
+    @ViewChild('cualesConsumoMediNino')
+    cualesConsumoMediNino: ElementRef;
+    @ViewChild('cuandoConsumoMediNino')
+    cuandoConsumoMediNino: ElementRef;
+    @ViewChild('siCirugiasNino')
+    siCirugiasNino: ElementRef;
+    @ViewChild('noCirugiasNino')
+    noCirugiasNino: ElementRef;
+    @ViewChild('cualesCirugiasNino')
+    cualesCirugiasNino: ElementRef;
+    @ViewChild('cuandoCirugiasNino')
+    cuandoCirugiasNino: ElementRef;
+    @ViewChild('tipoDietasNino')
+    tipoDietasNino: ElementRef;
+    @ViewChild('ultimaComidaNino')
+    ultimaComidaNino: ElementRef;
+    @ViewChild('tipoPartoNino')
+    tipoPartoNino: ElementRef;
+    @ViewChild('estadoNino')
+    estadoNino: ElementRef;
+    @ViewChild('siFueHoyNino')
+    siFueHoyNino: ElementRef;
+    @ViewChild('noFueHoyNino')
+    noFueHoyNino: ElementRef;
+    @ViewChild('siEscuelaNino')
+    siEscuelaNino: ElementRef;
+    @ViewChild('noEscuelaNino')
+    noEscuelaNino: ElementRef;
+
+    constructor(private _broadCast: Broadcaster,
+                private _modalService: BsModalRef) {
         _broadCast.on('triageType')
-            .subscribe((response:number)=>{
+            .subscribe((response: number) => {
                 this.triageType = response;
-            })
+            });
 
         _broadCast.on('questions')
-            .subscribe((response:any)=>{
-                if(this.triageType == TRIAGETYPE.KID) this.questionsKid = response;
-                if(this.triageType == TRIAGETYPE.ADULTMALE) this.questionsMan = response;
-                if(this.triageType == TRIAGETYPE.WOMAN) this.questionsWoman = response;
-                if(this.triageType == TRIAGETYPE.PREGNANT) this.questionsWoman = response
-            })
+            .subscribe((response: any) => {
+                if (this.triageType == TRIAGETYPE.KID) {
+                    this.questionsKid = response;
+                    this.focusChild();
+                }
+                if (this.triageType == TRIAGETYPE.ADULTMALE) {
+                    this.questionsMan = response;
+                    this.focusMan();
+                }
+                if (this.triageType == TRIAGETYPE.WOMAN) {
+                    this.questionsWoman = response;
+                    this.focusWoman();
+                }
+                if (this.triageType == TRIAGETYPE.PREGNANT) {
+                    this.questionsWoman = response;
+                    this.focusPregnant();
+                }
+            });
     }
 
-    focus(){
-        setTimeout(()=>{
-            this.preguntasRef.nativeElement.focus();
-            this.preguntasRefuno.nativeElement.focus();
-            this.preguntasRef2.nativeElement.focus();
-            this.preguntasRef3.nativeElement.focus();
-            this.preguntasRef4.nativeElement.focus();
-            // this.preguntasRef5.nativeElement.focus();
-            // this.preguntasRef6.nativeElement.focus();
-            // this.preguntasRef7.nativeElement.focus();
-            // this.preguntasRef8.nativeElement.focus();
-            // this.preguntasRef9.nativeElement.focus();
-            // this.preguntasRef10.nativeElement.focus();
-        }, 100)
+    focusWoman() {
+        setTimeout(() => {
+            this.tiempoSintomasMujerEmb.nativeElement.focus();
+            this.siConsumoMedicMujerEmb.nativeElement.focus();
+            this.noConsumoMedicMujerEmb.nativeElement.focus();
+            this.cualesConsumoMujerEmb.nativeElement.focus();
+            this.cuandoConsumoMujerEmb.nativeElement.focus();
+            this.siCirugiasMujerEmb.nativeElement.focus();
+            this.noCirugiasMujerEmb.nativeElement.focus();
+            this.cualesCirugiasMujerEmb.nativeElement.focus();
+            this.cuandoCirugiasMujerEmb.nativeElement.focus();
+            this.numeroEmbarazosMujerEmb.nativeElement.focus();
+            this.numeroPartosMujerEmb.nativeElement.focus();
+            this.numeroAbortosMujerEmb.nativeElement.focus();
+            this.siLactanciaMujerEmb.nativeElement.focus();
+            this.noLactanciaMujerEmb.nativeElement.focus();
+            this.ultimoAbortoMujerEmb.nativeElement.focus();
+            this.mentruacionMujer.nativeElement.focus();
+        }, 100);
+    }
 
+    focusPregnant() {
+        setTimeout(() => {
+            this.tiempoSintomasMujerEmb.nativeElement.focus();
+            this.siConsumoMedicMujerEmb.nativeElement.focus();
+            this.noConsumoMedicMujerEmb.nativeElement.focus();
+            this.cualesConsumoMujerEmb.nativeElement.focus();
+            this.cuandoConsumoMujerEmb.nativeElement.focus();
+            this.siCirugiasMujerEmb.nativeElement.focus();
+            this.noCirugiasMujerEmb.nativeElement.focus();
+            this.cualesCirugiasMujerEmb.nativeElement.focus();
+            this.cuandoCirugiasMujerEmb.nativeElement.focus();
+            this.numeroEmbarazosMujerEmb.nativeElement.focus();
+            this.numeroPartosMujerEmb.nativeElement.focus();
+            this.numeroAbortosMujerEmb.nativeElement.focus();
+            this.siLactanciaMujerEmb.nativeElement.focus();
+            this.noLactanciaMujerEmb.nativeElement.focus();
+            this.ultimoAbortoMujerEmb.nativeElement.focus();
+            this.gestacionEmb.nativeElement.focus();
+        }, 100);
+    }
+
+    focusMan(){
+        setTimeout(()=>{
+            this.tiempoSintomasHmr.nativeElement.focus();
+            this.siCirugiasHmr.nativeElement.focus();
+            this.noCirugiasHmr.nativeElement.focus();
+            this.cualesCirugiasHmr.nativeElement.focus();
+            this.cuandoCirugiasHmr.nativeElement.focus();
+            this.siConsumoMedicamentosHmr.nativeElement.focus();
+            this.noConsumoMedicamentosHmr.nativeElement.focus();
+            this.cualesConsumoMedicamentosHmr.nativeElement.focus();
+            this.cuandoConsumoMedicamentosHmr.nativeElement.focus();
+        }, 100)
+    }
+
+    focusChild(){
+        setTimeout(()=>{
+            this.tiempoSintomasHmr.nativeElement.focus();
+            this.siCirugiasHmr.nativeElement.focus();
+            this.noCirugiasHmr.nativeElement.focus();
+            this.cualesCirugiasHmr.nativeElement.focus();
+            this.cuandoCirugiasHmr.nativeElement.focus();
+            this.siConsumoMedicamentosHmr.nativeElement.focus();
+            this.noConsumoMedicamentosHmr.nativeElement.focus();
+            this.cualesConsumoMedicamentosHmr.nativeElement.focus();
+            this.cuandoConsumoMedicamentosHmr.nativeElement.focus();
+        }, 100)
     }
 
     ngOnInit() {
-        this.focus();
     }
 
-    closeModal(){
+    closeModal() {
         this._modalService.hide();
     }
 

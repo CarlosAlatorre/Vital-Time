@@ -1,0 +1,140 @@
+<section class="p-l-15 p-r-15" style="width: 700px">
+    <div class="row">
+
+        <!--Informaciòn basica-->
+        <div class="col-4 d-p-detallesIzquierda m-t-10">
+            <div #gmap style='width:100%; height:90%'></div>
+        </div>
+
+        <!--Sintomas del paciente-->
+        <div class="col-8 d-p-detallesDerecha ">
+
+
+            <!--Requerimientos-->
+            <div class="row d-p-row-requerimientos m-b-20">
+
+                <div class="col-10" align="center">
+                    <h4>Resumen del paciente</h4>
+                </div>
+
+                <div class="col-2" align="center">
+                    <i class="zmdi zmdi-close zmdi-hc-2x d-p-close-icon cursor-pointer text-danger"
+                       (click)="closeModal()"></i>
+                </div>
+
+            </div>
+
+            <!--Informacion de los sintomas-->
+            <div class="row d-p-detallesPaciente">
+
+                <!--Informacion de pulso etc-->
+                <div class="col-6">
+
+                    <!--Pulso-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Tipo de paciente</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.triageType">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Presion Sintolica-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Estado de alerta</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.alertState">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Presion Diastolica-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Ritmo cardiaco</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.ritmoCardiaco">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Temperatura-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Frecuencia cardiaca</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.frecuenciaCardiaca">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--spO2-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Tension arterial</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.tensionArterial">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Detalles de sintomas-->
+                <div class="col-6">
+                    <!--Pulso-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">SPO2</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.saturacionOxigeno">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Presion Sintolica-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Temperatura</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.temperatura">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Presion Diastolica-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Frecuencia respiratoria</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.frecuenciaRespiratoria">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Temperatura-->
+                    <div class="row d-p-rows-r">
+                        <div class="col-12">
+                            <span class="d-block">Sospecha diagnostica</span>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-line" readonly="readonly" [(ngModel)]="patientInfoEmergency.sospechaDiagnostica">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

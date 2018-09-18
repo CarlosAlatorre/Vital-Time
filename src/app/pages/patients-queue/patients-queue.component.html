@@ -1,24 +1,5 @@
 <section class="content">
     <div class="card p-l-20 p-r-20" style="height: 80vh">
-        <!--Filters-->
-        <div class="row p-t-20">
-            <div class="offset-3 col-1 p-r-5 text-right">
-                <!--<i class="zmdi zmdi-search zmdi-hc-lg" style="position: relative; top: 8px;"></i>-->
-            </div>
-            <!--<div class="col-2  p-l-5">-->
-            <!--<div class="form-group">-->
-            <!--<input type="text" class="form-control form-control-line" placeholder="Buscar por nombre">-->
-            <!--<i class="form-group__bar"></i>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-3">-->
-            <!--<div class="form-group">-->
-            <!--<input type="text" class="form-control form-control-line" placeholder="Buscar por clave de seguro">-->
-            <!--<i class="form-group__bar"></i>-->
-            <!--</div>-->
-            <!--</div>-->
-        </div>
-
         <!--Patients Queue-->
         <div class="row m-l-10">
             <div class="col-9">
@@ -202,7 +183,7 @@
                 </div>
 
                 <div class="c-p-crear-paciente" style="text-align: center; color: #4498db;">
-                    <span class="c-p-label-crear cursor-pointer">Crear nuevo paciente</span>
+                    <!--<span class="c-p-label-crear cursor-pointer">Crear nuevo paciente</span>-->
                 </div>
 
                 <div class="row m-t-50" *ngIf="showNotification">
@@ -221,59 +202,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="false">
-            <div class="col-6">
-                <input type="text" class="form-control form-control-line" [(ngModel)]="symptom.name"
-                       placeholder="Nombre del sintoma">
-                <select class="form-control form-control-line" [(ngModel)]="symptom.level">
-                    <option [value]="levelSymptom.RED"> Rojo </option>
-                    <option [value]="levelSymptom.ORANGE">Naranja</option>
-                    <option [value]="levelSymptom.YELLOW">Amarillo</option>
-                    <option [value]="levelSymptom.GREEN">Verde</option>
-                    <option [value]="levelSymptom.BLUE">Azul</option>
-                </select>
-                <select class="form-control form-control-line" [(ngModel)]="symptom.triage">
-                    <option [value]="triageType.KID">Pediatrico</option>
-                    <!--<option [value]="triageType.WOMAN">Adulto Mujer</option>-->
-                    <option [value]="triageType.PREGNANT">Obstetrico</option>
-                    <option [value]="triageType.ADULTMALE">Adulto</option>
-                </select>
-
-                <button class="btn btn-primary" (click)="addSymptom()">Agregar sintoma</button>
-            </div>
-
-            <div class="col-6">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Sintoma</th>
-                        <th>Nivel</th>
-                        <th>Triage</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr *ngFor="let symptom of symptoms | async">
-                        <td>
-                            {{ symptom.name }}
-                        </td>
-                        <td>
-                            {{ getLevel(symptom.level) }}
-                        </td>
-                        <td>
-                            {{ getTriageType(symptom.triage) }}
-                        </td>
-                        <td>
-                            <i class="zmdi zmdi-close-circle text-danger zmdi-hc-2x cursor-pointer"
-                               (click)="deleteSymptom(symptom.key)"></i>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
-
 </section>
 
-<growl [title]="growlTitle" [showGrowl]="showGrowl"></growl>
+<growl [title]="growlTitle" [showGrowl]="showGrowl" [theme]="growlTheme"></growl>

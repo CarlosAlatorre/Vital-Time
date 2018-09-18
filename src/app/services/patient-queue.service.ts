@@ -32,7 +32,7 @@ export class PatientQueueService {
     }
 
     getNotification(){
-        return this._db.object('notification').valueChanges()
+        return this._db.object('notification/0').valueChanges()
     }
 
     sendNotification(){
@@ -40,6 +40,6 @@ export class PatientQueueService {
     }
 
     closeNotification(){
-        this._db.object('notification').update({alarma: false});
+        this._db.object('notification/0').update({alarma: false});
     }
 }
