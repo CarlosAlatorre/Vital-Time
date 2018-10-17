@@ -16,8 +16,8 @@ export class MapProvider {
 
   createMap(mapElement: ElementRef) {
     this.map = new google.maps.Map(mapElement.nativeElement, {
-      center: new google.maps.LatLng(29.106049, -110.946938),
-      zoom: 15,
+      center: new google.maps.LatLng(26.92824304441136, -105.67462267799988),
+      zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       zoomControl: false,
       mapTypeControl: false,
